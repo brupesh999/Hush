@@ -3,25 +3,57 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    float attackTimer = 0f; // attack cooldown timer
-    [SerializeField] private float attackCooldown = 0.1f; // attack cooldown amount
+    [Header("Attack Settings")]
+    [SerializeField] private GameObject meleeAttack;
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private float attackCooldown = 0.1f;
+    private float attackTimer;
 
-    // [SerializeField] private float shieldDuration = 1.0f; // how long shield lasts? nvm cus lasts until hit
-    // thoughts on small shield cooldown after it breaks/limit on how long u can have shield?
-    [SerializeField] private GameObject shieldObject; // shield prefab
-    private GameObject activeShield; // shield game object
-    private bool shieldActive = false; // shield active or not
+    [Header("Shield Settings")]
+    [SerializeField] private GameObject shieldObject;
+    private GameObject activeShield;
+    private bool shieldActive = false;
 
-    [SerializeField] private GameObject meleeAttack; // melee prefab
-    [SerializeField] private GameObject projectile; // projectile prefab
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float jumpForce = 7f;
+    private Rigidbody2D rb;
+    private Vector2 moveInput;
+    private bool isGrounded = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+     void Update()
+    {
+        attackTimer += Time.deltaTime;
+        rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+        // shieldTimer += Time.deltaTime;
+
+    }
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+        Debug.Log("Move input: " + moveInput);
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.started && isGrounded)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            isGrounded = false;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.contacts.Length > 0 && other.contacts[0].normal.y > 0.5f)
+            isGrounded = true;
+    }
+
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.started && attackTimer >= attackCooldown)
@@ -50,14 +82,6 @@ public class Player : MonoBehaviour
             ActivateShield();
         }
     }
-
-    void Update()
-    {
-        attackTimer += Time.deltaTime;
-        // shieldTimer += Time.deltaTime;
-
-    }
-
     void ActivateShield()
     {
         shieldActive = true;
