@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -10,33 +11,50 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject shieldObject; // shield prefab
     private GameObject activeShield; // shield game object
     private bool shieldActive = false; // shield active or not
+
+    [SerializeField] private GameObject meleeAttack; // melee prefab
     [SerializeField] private GameObject projectile; // projectile prefab
-    private GameObject attackProjectile; // active projectile
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.started && attackTimer >= attackCooldown)
+        {
+            attackTimer = 0f;
+
+            bool useMelee = true; // rn only melee cus short range lol
+            // technically the projectile code works i j havent added long range button
+            // should be easy to add??
+
+            if (useMelee)
+            {
+                GameObject attack = Instantiate(meleeAttack, transform.position, Quaternion.identity);
+                attack.GetComponent<BasicPlayerMelee>().Init(transform);
+            }
+            else
+            {
+                Instantiate(projectile, transform.position + new Vector3(0.5f, 0, 0), Quaternion.identity);
+            }
+        }
+    }
+    public void OnShield(InputAction.CallbackContext context)
+    {
+        if (context.started && !shieldActive)
+        {
+            ActivateShield();
+        }
+    }
+
     void Update()
     {
         attackTimer += Time.deltaTime;
         // shieldTimer += Time.deltaTime;
-
-        // attack on press key A
-        if (Input.GetKeyDown(KeyCode.A) && attackTimer >= attackCooldown)
-        {
-            attackTimer = 0f;
-            Instantiate(attackProjectile, transform.position + new Vector3(0.5f, 0, 0), Quaternion.identity);
-        }
-
-        // shield on press key Q
-        if (Input.GetKeyDown(KeyCode.Q) && !shieldActive)
-        {
-            ActivateShield();
-        }
 
     }
 

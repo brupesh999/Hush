@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BasicPlayerProjectile : MonoBehaviour
 {
-
     [SerializeField] private float velocity = 5f;
+    [SerializeField] private float damage = 1f;
 
     // void Awake(){
     //     renderer = GetComponent<Renderer>();
@@ -14,9 +14,9 @@ public class BasicPlayerProjectile : MonoBehaviour
     {
         transform.Translate(Vector3.right * velocity * Time.deltaTime);
 
-        if (!GetComponent<Renderer>().isVisible){
-            //if the projectile is no longer on-screen, destroy it
-            Destroy(gameObject);
-        }
+        // if (!GetComponent<Renderer>().isVisible){
+        //     //if the projectile is no longer on-screen, destroy it
+        //     Destroy(gameObject);
+        // }
     }
 }

@@ -5,6 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - shieldObject: {fileID: 1272153621244786352, guid: cb72fae1615aa466ba45b7c0661d1c31, type: 3}
+  - meleeAttack: {fileID: 2200770599266668781, guid: ada5c4bb29aa247e69e1af7d403d6cf3, type: 3}
   - projectile: {fileID: 1272153621244786352, guid: 10fc1afdf87d34067b506d29ba0c2d93, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
