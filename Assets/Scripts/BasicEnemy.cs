@@ -17,6 +17,9 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] private float movementSpeed = 1f;
     public Vector3 currentDirection = new Vector3(-1, 0, 0);//currently moving left or right?
 
+    [Header ("Other")]
+    public float enemyHP = 5f;
+
     private List<RaycastHit2D> castResult = new List<RaycastHit2D>();
 
     // Update is called once per frame
