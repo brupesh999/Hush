@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 3429538907151083476}
   - component: {fileID: 2148790304931159129}
   - component: {fileID: 2888166885293848363}
-  - component: {fileID: 893441611023218528}
-  - component: {fileID: 5529123665842261398}
-  m_Layer: 6
+  - component: {fileID: 3494903520893916153}
+  m_Layer: 0
   m_Name: BasicEnemyProjectile
-  m_TagString: Untagged
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.119, y: -1.762, z: 0}
-  m_LocalScale: {x: 2.8969, y: 2.8969, z: 2.8969}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,9 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44347032b7fee494791a00c735dd64e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: -5
-  damage: 10
---- !u!58 &893441611023218528
+  speed: 5
+  damage: 1
+--- !u!58 &3494903520893916153
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

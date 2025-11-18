@@ -2,18 +2,20 @@ using UnityEngine;
 
 public class BasicEnemyProjectile : MonoBehaviour
 {
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private int damage = 1f; //needs to be public so hit player can access it
+    private Vector3 direction = new Vector3 (-1, 0, 0);
 
-    [SerializeField] private float velocity = -5f;
-    [SerializeField] private int damage = 20;
-
-    // void Awake(){
-    //     renderer = GetComponent<Renderer>();
-    // }
+    void Awake(){
+        //when instantiated, grab current direction of the enemy which spawned it (parent)
+        GameObject ParentEnemy = transform.parent.gameObject;
+        direction = ParentEnemy.GetComponent<BasicEnemy>().currentDirection;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.right * velocity * Time.deltaTime);
+        transform.Translate(direction * speed * Time.deltaTime);
 
         if (!GetComponent<Renderer>().isVisible)
         {

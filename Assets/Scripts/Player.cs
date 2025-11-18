@@ -25,6 +25,14 @@ public class Player : MonoBehaviour
     private Vector2 moveInput;
     private bool isGrounded = true;
 
+    [Header("Player Settings")]
+    public float currentHP = 10f;//needs to be public so music can access it
+
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource footsteps;
+    [SerializeField] private AudioSource hitSound;
+    [SerializeField] private AudioClip hitSoundClip;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,6 +44,18 @@ public class Player : MonoBehaviour
     {
         attackTimer += Time.deltaTime;
         rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+
+        // player is walking on ground if there is forward movement but no upward movement
+        if (moveInput.x != 0 && rb.linearVelocity.y == 0)
+        {
+            if (!footsteps.isPlaying)
+                footsteps.Play();
+        }
+        else
+        {
+            if (footsteps.isPlaying)
+                footsteps.Stop();
+        }
         // shieldTimer += Time.deltaTime;
 
     }
@@ -57,6 +77,12 @@ public class Player : MonoBehaviour
     {
         if (other.contacts.Length > 0 && other.contacts[0].normal.y > 0.5f)
             isGrounded = true;
+        
+        //when hit by enemy projectile, subtract damage from player HP
+        if (other.gameObject.tag == "EnemyProjectile"){
+            currentHP -= other.gameObject.GetComponent<BasicEnemyProjectile>().damage;
+            hitSound.PlayOneShot(hitSoundClip);
+        }
     }
 
     public void OnAttack(InputAction.CallbackContext context)
