@@ -4,31 +4,45 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [Header("Health Settings")]
-    [SerializeField] private int maxHP = 100;
+    public int maxHP = 100;
     public float currentHP;
 
     [Header("Attack Settings")]
-    [SerializeField] private GameObject meleeAttack;
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private float attackCooldown = 0.1f;
+    [SerializeField]
+    private GameObject meleeAttack;
+
+    [SerializeField]
+    private GameObject projectile;
+
+    [SerializeField]
+    private float attackCooldown = 0.1f;
     private float attackTimer;
 
     [Header("Shield Settings")]
-    [SerializeField] private GameObject shieldObject;
+    [SerializeField]
+    private GameObject shieldObject;
     private GameObject activeShield;
     private bool shieldActive = false;
 
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpForce = 7f;
+    [SerializeField]
+    private float moveSpeed = 5f;
+
+    [SerializeField]
+    private float jumpForce = 7f;
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool isGrounded = true;
 
     [Header("Audio Settings")]
-    [SerializeField] private AudioSource footsteps;
-    [SerializeField] private AudioSource hitSound;
-    [SerializeField] private AudioClip hitSoundClip;
+    [SerializeField]
+    private AudioSource footsteps;
+
+    [SerializeField]
+    private AudioSource hitSound;
+
+    [SerializeField]
+    private AudioClip hitSoundClip;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,7 +51,7 @@ public class Player : MonoBehaviour
         currentHP = maxHP;
     }
 
-     void Update()
+    void Update()
     {
         attackTimer += Time.deltaTime;
         rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
@@ -54,8 +68,8 @@ public class Player : MonoBehaviour
                 footsteps.Stop();
         }
         // shieldTimer += Time.deltaTime;
-
     }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -70,13 +84,15 @@ public class Player : MonoBehaviour
             isGrounded = false;
         }
     }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.contacts.Length > 0 && other.contacts[0].normal.y > 0.5f)
             isGrounded = true;
-        
+
         //when hit by enemy projectile, subtract damage from player HP
-        if (other.gameObject.tag == "EnemyProjectile"){
+        if (other.gameObject.tag == "EnemyProjectile")
+        {
             currentHP -= other.gameObject.GetComponent<BasicEnemyProjectile>().damage;
         }
     }
@@ -93,15 +109,24 @@ public class Player : MonoBehaviour
 
             if (useMelee)
             {
-                GameObject attack = Instantiate(meleeAttack, transform.position, Quaternion.identity);
+                GameObject attack = Instantiate(
+                    meleeAttack,
+                    transform.position,
+                    Quaternion.identity
+                );
                 attack.GetComponent<BasicPlayerMelee>().Init(transform);
             }
             else
             {
-                Instantiate(projectile, transform.position + new Vector3(0.5f, 0, 0), Quaternion.identity);
+                Instantiate(
+                    projectile,
+                    transform.position + new Vector3(0.5f, 0, 0),
+                    Quaternion.identity
+                );
             }
         }
     }
+
     public void OnShield(InputAction.CallbackContext context)
     {
         if (context.started && !shieldActive)
@@ -109,13 +134,20 @@ public class Player : MonoBehaviour
             ActivateShield();
         }
     }
+
     void ActivateShield()
     {
         shieldActive = true;
         // shieldTimer = 0f;
-        activeShield = Instantiate(shieldObject, transform.position, Quaternion.identity, transform);
+        activeShield = Instantiate(
+            shieldObject,
+            transform.position,
+            Quaternion.identity,
+            transform
+        );
         var shield = activeShield.GetComponent<Shield>();
-        if (shield) shield.Init(this);
+        if (shield)
+            shield.Init(this);
     }
 
     public void ApplyDamage(int dmg)
