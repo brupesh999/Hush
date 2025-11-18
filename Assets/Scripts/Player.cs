@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
 
     public void OnPlayerHit(int dmg)
     {
-        ApplyDamage(20); // how much damage idk
+        ApplyDamage(10); // how much damage idk
     }
 
 
