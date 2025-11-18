@@ -3,7 +3,7 @@ using UnityEngine;
 public class BasicEnemyProjectile : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
-    [SerializeField] private int damage = 1f; //needs to be public so hit player can access it
+    public int damage = 10; //needs to be public so hit player can access it
     private Vector3 direction = new Vector3 (-1, 0, 0);
 
     void Awake(){
@@ -38,7 +38,7 @@ public class BasicEnemyProjectile : MonoBehaviour
         // player hit
         if (other.TryGetComponent<Player>(out var player))
         {   
-            Debug.Log("Projectile hit player");
+            Debug.Log("Projectile hit player for "+damage);
             player.ApplyDamage(damage);
             Destroy(gameObject);
         }

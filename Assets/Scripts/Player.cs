@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
     [Header("Health Settings")]
     [SerializeField] private int maxHP = 100;
-    private int currentHP;
+    public float currentHP;
 
     [Header("Attack Settings")]
     [SerializeField] private GameObject meleeAttack;
@@ -24,9 +24,6 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool isGrounded = true;
-
-    [Header("Player Settings")]
-    public float currentHP = 10f;//needs to be public so music can access it
 
     [Header("Audio Settings")]
     [SerializeField] private AudioSource footsteps;
@@ -124,7 +121,7 @@ public class Player : MonoBehaviour
 
     public void ApplyDamage(int dmg)
     {
-        
+        Debug.Log("ApplyDamage dmg is "+dmg);
         currentHP -= dmg;
         if (currentHP < 0) currentHP = 0;
 
@@ -138,10 +135,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void OnPlayerHit(int dmg)
-    {
-        ApplyDamage(10); // how much damage idk
-    }
+    // public void OnPlayerHit(int dmg)
+    // {
+    //     ApplyDamage(10); // how much damage idk
+    // }
 
 
     public void ShieldBroken()
