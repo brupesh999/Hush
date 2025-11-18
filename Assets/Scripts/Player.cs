@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [Header("Health Settings")]
-    [SerializeField] private int maxHP = 100;
+    public int maxHP = 100;
     public float currentHP;
 
     [Header("Attack Settings")]
