@@ -90,11 +90,11 @@ public class Player : MonoBehaviour
         if (other.contacts.Length > 0 && other.contacts[0].normal.y > 0.5f)
             isGrounded = true;
 
-        //when hit by enemy projectile, subtract damage from player HP
-        if (other.gameObject.tag == "EnemyProjectile")
-        {
-            currentHP -= other.gameObject.GetComponent<BasicEnemyProjectile>().damage;
-        }
+        // //when hit by enemy projectile, subtract damage from player HP
+        // if (other.gameObject.tag == "EnemyProjectile")
+        // {
+        //     currentHP -= other.gameObject.GetComponent<BasicEnemyProjectile>().damage;
+        // }
     }
 
     public void OnAttack(InputAction.CallbackContext context)
