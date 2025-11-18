@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 1431759264}
   - component: {fileID: 1431759266}
   - component: {fileID: 1431759265}
+  - component: {fileID: 1431759267}
   m_Layer: 5
   m_Name: HealthUI
   m_TagString: Untagged
@@ -433,8 +434,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -952.92, y: -371.14}
-  m_SizeDelta: {x: 1541.83, y: 492.28}
+  m_AnchoredPosition: {x: -478.74, y: -400.89}
+  m_SizeDelta: {x: 593.46, y: 187.83}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1431759265
 MonoBehaviour:
@@ -449,12 +450,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartPrefab: {fileID: 6053039676777641293, guid: 7423cd4ec85b24dd48df5e1fca04a4f4, type: 3}
-  healthPerHeart: 2
+  healthPerHeart: 20
   fullHeart: {fileID: 1109063772672943838, guid: c2c26591a61704636b3f13ed3bd382b0, type: 3}
   emptyHeart: {fileID: 1867641300, guid: c2c26591a61704636b3f13ed3bd382b0, type: 3}
   halfFullHeart: {fileID: 2023413425, guid: c2c26591a61704636b3f13ed3bd382b0, type: 3}
   player: {fileID: 550669387}
-  maxHealth: 10
+  layoutGroupController: {fileID: 0}
 --- !u!114 &1431759266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,6 +482,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1431759267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431759263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ce905d4a97e4250960a47811e96f64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1534850644
 GameObject:
   m_ObjectHideFlags: 0
