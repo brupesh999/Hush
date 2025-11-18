@@ -18,6 +18,18 @@ public class Shield : MonoBehaviour
     {
 
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Shield collider touched by: " + other.name);
+    }
+
+    public void AbsorbDamage(int damage)
+    {
+        int reduced = damage / 2;
+        Debug.Log("Shield absorbed hit");
+        owner.ApplyDamage(reduced);
+        Break();
+    }
     public void Break()
     {
         owner.ShieldBroken();
