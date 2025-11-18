@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +18,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float attackCooldown = 0.1f;
     private float attackTimer;
+
+    [Header("Heal Settings")]
+    public int healAmt = 5;
+    private float healCooldown = 3f;
+    private float healTimer;
 
     [Header("Shield Settings")]
     [SerializeField]
@@ -54,6 +60,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         attackTimer += Time.deltaTime;
+        healTimer += Time.deltaTime;
         rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
 
         // player is walking on ground if there is forward movement but no upward movement
@@ -73,7 +80,7 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        // Debug.Log("Move input: " + moveInput);
+        // UnityEngine.Debug.Log("Move input: " + moveInput);
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -135,6 +142,28 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void OnHeal(InputAction.CallbackContext context)
+    {
+        if (context.started && healTimer >= healCooldown)
+        {
+            healTimer = 0f;
+
+            if (currentHP <= (maxHP - healAmt))
+            {
+                currentHP += healAmt;
+            }
+            else
+            {
+                currentHP = maxHP;
+            }
+
+        }
+        else
+        {
+            UnityEngine.Debug.Log("heal still on cooldown " + (healCooldown - healTimer) + "seconds left");
+        } 
+    }
+
     void ActivateShield()
     {
         shieldActive = true;
@@ -152,17 +181,17 @@ public class Player : MonoBehaviour
 
     public void ApplyDamage(int dmg)
     {
-        Debug.Log("ApplyDamage dmg is "+dmg);
+        UnityEngine.Debug.Log("ApplyDamage dmg is "+dmg);
         currentHP -= dmg;
         if (currentHP < 0) currentHP = 0;
 
-        Debug.Log("Player took " + dmg + " new Player HP: " + currentHP);
+        UnityEngine.Debug.Log("Player took " + dmg + " new Player HP: " + currentHP);
         // j so we know it workslol
         hitSound.PlayOneShot(hitSoundClip);
 
         if (currentHP <= 0)
         {
-            Debug.Log("Player has died.");
+            UnityEngine.Debug.Log("Player has died.");
             // need to do some death animation or sth idk
         }
     }
