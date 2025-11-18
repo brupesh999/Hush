@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
 
     [Header("Player Settings")]
     public float currentHP = 10f; //needs to be public so music can access it
-    public float maxHP = 10f;
+    public float maxHP = 10f; //needs to be public so music can access it
 
     [Header("Audio Settings")]
     [SerializeField]
