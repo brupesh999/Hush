@@ -6,7 +6,7 @@ public class Shield : MonoBehaviour
     private Player owner;
     void Start()
     {
-
+        Debug.Log("Shield spawned! Collider enabled: " + GetComponent<Collider2D>().enabled);
     }
     public void Init(Player player)
     {

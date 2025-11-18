@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        Debug.Log("Move input: " + moveInput);
+        // Debug.Log("Move input: " + moveInput);
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -98,6 +98,7 @@ public class Player : MonoBehaviour
 
     public void ApplyDamage(int dmg)
     {
+        
         currentHP -= dmg;
         if (currentHP < 0) currentHP = 0;
 
