@@ -109,6 +109,10 @@ MonoBehaviour:
   shieldObject: {fileID: 1272153621244786352, guid: cb72fae1615aa466ba45b7c0661d1c31, type: 3}
   moveSpeed: 5
   jumpForce: 7
+  currentHP: 10
+  footsteps: {fileID: 0}
+  hitSound: {fileID: 0}
+  hitSoundClip: {fileID: 8300000, guid: 0fbf5fbb4d3c84c3484937385aa7142e, type: 3}
 --- !u!114 &3105257093465385431
 MonoBehaviour:
   m_ObjectHideFlags: 0
