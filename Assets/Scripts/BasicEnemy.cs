@@ -11,14 +11,20 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] private float shootInterval = 2f;
     [SerializeField] private float detectionDistance = 7f;
 
+    [Header("Health Settings")]
+    [SerializeField] private int maxHP = 50;
+    private int currentHP;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        currentHP = maxHP;
+    }
     [Header ("Move-y settings")]
     [SerializeField] private Vector3 spawnPoint = new Vector3(4, -2, 0);//enemy's origin point, movement will center around
     [SerializeField] private float movementDistance = 2f;//how far enemy will move from spawnPoint
     [SerializeField] private float movementSpeed = 1f;
     public Vector3 currentDirection = new Vector3(-1, 0, 0);//currently moving left or right?
-
-    [Header ("Other")]
-    public float enemyHP = 5f;
 
     private List<RaycastHit2D> castResult = new List<RaycastHit2D>();
 
@@ -52,5 +58,21 @@ public class BasicEnemy : MonoBehaviour
             transform.Translate(currentDirection * movementSpeed * Time.deltaTime);
             if (Mathf.Abs(transform.position.x - spawnPoint.x) > movementDistance) currentDirection *= -1;
         }
+    }
+    
+    public void TakeDamage(int damage)
+    {
+        currentHP -= damage;
+        Debug.Log("Enemy took " + damage + " damage. HP: " + currentHP);
+        
+        if (currentHP <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Debug.Log("Enemy died!");
+        Destroy(gameObject);
     }
 }

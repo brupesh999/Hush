@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6ac6c5884de413082a5bc308e8d827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 100
   meleeAttack: {fileID: 2200770599266668781, guid: ada5c4bb29aa247e69e1af7d403d6cf3, type: 3}
   projectile: {fileID: 1272153621244786352, guid: 10fc1afdf87d34067b506d29ba0c2d93, type: 3}
   attackCooldown: 0.1
@@ -332,15 +333,15 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.000000007450581, y: -0.015627354}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 0.02}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.36, y: 0.84}
+    oldSize: {x: 0.36, y: 0.87}
     newSize: {x: 0.36, y: 0.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.37013775, y: 0.8593537}
   m_EdgeRadius: 0
