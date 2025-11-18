@@ -78,7 +78,6 @@ public class Player : MonoBehaviour
         //when hit by enemy projectile, subtract damage from player HP
         if (other.gameObject.tag == "EnemyProjectile"){
             currentHP -= other.gameObject.GetComponent<BasicEnemyProjectile>().damage;
-            hitSound.PlayOneShot(hitSoundClip);
         }
     }
 
@@ -127,6 +126,7 @@ public class Player : MonoBehaviour
 
         Debug.Log("Player took " + dmg + " new Player HP: " + currentHP);
         // j so we know it workslol
+        hitSound.PlayOneShot(hitSoundClip);
 
         if (currentHP <= 0)
         {
