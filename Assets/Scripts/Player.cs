@@ -3,6 +3,10 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [Header("Health Settings")]
+    [SerializeField] private int maxHP = 100;
+    private int currentHP;
+
     [Header("Attack Settings")]
     [SerializeField] private GameObject meleeAttack;
     [SerializeField] private GameObject projectile;
@@ -33,6 +37,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentHP = maxHP;
     }
 
      void Update()
@@ -57,7 +62,7 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        Debug.Log("Move input: " + moveInput);
+        // Debug.Log("Move input: " + moveInput);
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -117,11 +122,27 @@ public class Player : MonoBehaviour
         if (shield) shield.Init(this);
     }
 
-    public void OnPlayerHit()
+    public void ApplyDamage(int dmg)
     {
-        Debug.Log("Player took damage!");
-        // eventually add hp reduction
+        
+        currentHP -= dmg;
+        if (currentHP < 0) currentHP = 0;
+
+        Debug.Log("Player took " + dmg + " new Player HP: " + currentHP);
+        // j so we know it workslol
+
+        if (currentHP <= 0)
+        {
+            Debug.Log("Player has died.");
+            // need to do some death animation or sth idk
+        }
     }
+
+    public void OnPlayerHit(int dmg)
+    {
+        ApplyDamage(10); // how much damage idk
+    }
+
 
     public void ShieldBroken()
     {

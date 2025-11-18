@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class BasicEnemyProjectile : MonoBehaviour
 {
-
     [SerializeField] private float speed = 5f;
-    public float damage = 1f;//needs to be public so hit player can access it
+    [SerializeField] private int damage = 1f; //needs to be public so hit player can access it
     private Vector3 direction = new Vector3 (-1, 0, 0);
 
     void Awake(){
@@ -18,16 +17,31 @@ public class BasicEnemyProjectile : MonoBehaviour
     {
         transform.Translate(direction * speed * Time.deltaTime);
 
-        if (!GetComponent<Renderer>().isVisible){
+        if (!GetComponent<Renderer>().isVisible)
+        {
             //if the projectile is no longer on-screen, destroy it
             Destroy(gameObject);
         }
     }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // shield hit
+        if (other.TryGetComponent<Shield>(out var shield))
+        {
+            Debug.Log("Projectile hit shield");
+            shield.AbsorbDamage(damage);
+            Destroy(gameObject);
+            return;
+        }
 
-    void OnCollisionEnter2D(Collision2D other){
-        //when it hits the player, disappear
-        if (other.gameObject.tag == "Player"){
+        // player hit
+        if (other.TryGetComponent<Player>(out var player))
+        {   
+            Debug.Log("Projectile hit player");
+            player.ApplyDamage(damage);
             Destroy(gameObject);
         }
     }
+
 }
