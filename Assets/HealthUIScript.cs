@@ -18,7 +18,7 @@ public class HealthUIScript : MonoBehaviour
     public Sprite emptyHeart;
     public Sprite halfFullHeart;
     public Player player;
-    public FitHeartsLayoutGroup layoutGroupController;
+    private FitHeartsLayoutGroup layoutGroupController;
     private float maxHealth;
     private float curHealth = 0;
 
