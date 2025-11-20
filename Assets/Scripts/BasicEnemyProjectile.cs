@@ -29,7 +29,7 @@ public class BasicEnemyProjectile : MonoBehaviour
         // shield hit
         if (other.TryGetComponent<Shield>(out var shield))
         {
-            Debug.Log("Projectile hit shield");
+            // Debug.Log("Projectile hit shield");
             shield.AbsorbDamage(damage);
             Destroy(gameObject);
             return;
@@ -38,7 +38,7 @@ public class BasicEnemyProjectile : MonoBehaviour
         // player hit
         if (other.TryGetComponent<Player>(out var player))
         {   
-            Debug.Log("Projectile hit player for "+damage);
+            // Debug.Log("Projectile hit player for "+damage);
             player.ApplyDamage(damage);
             Destroy(gameObject);
         }
