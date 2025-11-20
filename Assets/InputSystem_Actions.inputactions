@@ -55,7 +55,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -100,6 +100,15 @@
                     "name": "Heal",
                     "type": "Button",
                     "id": "3fd2901a-eabb-4e15-87a8-890f701d41f1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LongRange",
+                    "type": "Button",
+                    "id": "8ff5f763-c246-4388-858a-c5a41eb0e6df",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -230,17 +239,6 @@
                 },
                 {
                     "name": "",
-                    "id": "05f6913d-c316-48b2-a6bb-e225f14c7960",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "886e731e-7071-4ae4-95c0-e61739dad6fd",
                     "path": "<Touchscreen>/primaryTouch/tap",
                     "interactions": "",
@@ -362,6 +360,17 @@
                 },
                 {
                     "name": "",
+                    "id": "312419ab-2956-42aa-ae50-386d2d926a8c",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1534dc16-a6aa-499d-9c3a-22b47347b52a",
                     "path": "<Keyboard>/1",
                     "interactions": "",
@@ -429,10 +438,10 @@
                 {
                     "name": "",
                     "id": "d9d66701-9bbd-4c82-904d-ece1ae7cb880",
-                    "path": "<Keyboard>/#(Q)",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -440,11 +449,22 @@
                 {
                     "name": "",
                     "id": "3d4888fc-2e6e-4732-9139-8dc7fbfba564",
-                    "path": "<Keyboard>/#(W)",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Heal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4524a96d-7f3f-462a-963f-b2215a40003b",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "LongRange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -2,21 +2,34 @@ using UnityEngine;
 
 public class BasicPlayerProjectile : MonoBehaviour
 {
-    [SerializeField] private float velocity = 5f;
-    [SerializeField] private float damage = 1f;
-
-    // void Awake(){
-    //     renderer = GetComponent<Renderer>();
-    // }
+    [SerializeField] private float speed = 5f;
+    private int damage;
+    private Vector3 direction = new Vector3 (1, 0, 0);
+    private Rigidbody2D rb;
 
     // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        transform.Translate(Vector3.right * velocity * Time.deltaTime);
+        rb = GetComponent<Rigidbody2D>();
+    }
 
-        // if (!GetComponent<Renderer>().isVisible){
-        //     //if the projectile is no longer on-screen, destroy it
-        //     Destroy(gameObject);
-        // }
+    public void Init(Transform playerTransform, int damageAmount, Vector3 directionIn)
+    {
+        damage = damageAmount;
+        direction = directionIn.normalized;
+
+        rb.linearVelocity = direction * speed;
+
+        Destroy(gameObject, 10f);
+
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.TryGetComponent<BasicEnemy>(out var enemy))
+        {
+            Debug.Log("Projectile hit enemy!");
+            enemy.TakeDamage(damage);
+            Destroy(gameObject);
+        }
     }
 }

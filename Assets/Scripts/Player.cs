@@ -13,11 +13,28 @@ public class Player : MonoBehaviour
     private GameObject meleeAttack;
 
     [SerializeField]
+    private int meleeDamage = 10;
+
+    [SerializeField]
+    private float attackCooldown = 1f;
+    private float attackTimer;
+
+    [SerializeField]
     private GameObject projectile;
 
     [SerializeField]
-    private float attackCooldown = 0.1f;
-    private float attackTimer;
+    private int lrDamage = 5;
+
+    [SerializeField]
+    private float lrCooldown = 3f;
+    private float lrTimer;
+
+    [SerializeField]
+    private int strMultiplier = 1;
+
+    [SerializeField]
+    private float strCooldown = 2f;
+    private float strTimer;
 
     [Header("Heal Settings")]
     public int healAmt = 5;
@@ -49,19 +66,45 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private AudioClip hitSoundClip;
+    private float dir;
+    private Vector3 fireDirection;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentHP = maxHP;
+
+        // can use all abilities at the beginning
+        attackTimer = attackCooldown;
+        healTimer = healCooldown;
+        lrTimer = lrCooldown;
+        strTimer = strCooldown;
     }
 
     void Update()
     {
+        // update ALL cooldown timers
         attackTimer += Time.deltaTime;
         healTimer += Time.deltaTime;
+        lrTimer += Time.deltaTime;
+        strTimer += Time.deltaTime;
+
         rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+
+        // change direction player is facing (litearlly just flips the sprite)
+        if (moveInput.x > 0 && transform.localScale.x < 0)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
+        else if (moveInput.x < 0 && transform.localScale.x > 0)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
 
         // player is walking on ground if there is forward movement but no upward movement
         if (moveInput.x != 0 && rb.linearVelocity.y == 0)
@@ -74,6 +117,9 @@ public class Player : MonoBehaviour
             if (footsteps.isPlaying)
                 footsteps.Stop();
         }
+
+        dir = transform.localScale.x > 0 ? 1 : -1;
+        fireDirection = new Vector3(dir, 0, 0);
         // shieldTimer += Time.deltaTime;
     }
 
@@ -110,30 +156,44 @@ public class Player : MonoBehaviour
         {
             attackTimer = 0f;
 
-            bool useMelee = true; // rn only melee cus short range lol
-            // technically the projectile code works i j havent added long range button
-            // should be easy to add??
-
-            if (useMelee)
-            {
-                GameObject attack = Instantiate(
-                    meleeAttack,
-                    transform.position,
-                    Quaternion.identity
-                );
-                attack.GetComponent<BasicPlayerMelee>().Init(transform);
-            }
-            else
-            {
-                Instantiate(
-                    projectile,
-                    transform.position + new Vector3(0.5f, 0, 0),
-                    Quaternion.identity
-                );
-            }
+            GameObject attack = Instantiate(
+                meleeAttack,
+                transform.position,
+                Quaternion.identity
+            );
+            attack.GetComponent<BasicPlayerMelee>().Init(transform, strMultiplier*meleeDamage, fireDirection);
         }
     }
+    public void OnLR(InputAction.CallbackContext context)
+    {
+        UnityEngine.Debug.Log("lr timer " + lrTimer);
+        if (context.started && lrTimer >= lrCooldown)
+        {
+            UnityEngine.Debug.Log("long range started");
+            lrTimer = 0f;
 
+            float dir = transform.localScale.x > 0 ? 1 : -1;
+            Vector3 fireDirection = new Vector3(dir, 0, 0);
+
+            GameObject lr = Instantiate(
+                projectile,
+                transform.position + fireDirection * 1.2f,
+                Quaternion.identity
+            );
+
+            lr.GetComponent<BasicPlayerProjectile>().Init(transform, strMultiplier*lrDamage, fireDirection);
+        }
+    }
+    public void OnStr(InputAction.CallbackContext context)
+    {
+        if (context.started && strTimer >= strCooldown)
+        {
+            strTimer = 0f;
+
+            strMultiplier = 2;
+            
+        }
+    }
     public void OnShield(InputAction.CallbackContext context)
     {
         if (context.started && !shieldActive)
@@ -160,7 +220,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.Log("heal still on cooldown " + (healCooldown - healTimer) + "seconds left");
+            // UnityEngine.Debug.Log("heal still on cooldown " + (healCooldown - healTimer) + "seconds left");
         } 
     }
 
@@ -181,17 +241,17 @@ public class Player : MonoBehaviour
 
     public void ApplyDamage(int dmg)
     {
-        UnityEngine.Debug.Log("ApplyDamage dmg is "+dmg);
+        // UnityEngine.Debug.Log("ApplyDamage dmg is "+dmg);
         currentHP -= dmg;
         if (currentHP < 0) currentHP = 0;
 
-        UnityEngine.Debug.Log("Player took " + dmg + " new Player HP: " + currentHP);
+        // UnityEngine.Debug.Log("Player took " + dmg + " new Player HP: " + currentHP);
         // j so we know it workslol
         hitSound.PlayOneShot(hitSoundClip);
 
         if (currentHP <= 0)
         {
-            UnityEngine.Debug.Log("Player has died.");
+            // UnityEngine.Debug.Log("Player has died.");
             // need to do some death animation or sth idk
         }
     }
