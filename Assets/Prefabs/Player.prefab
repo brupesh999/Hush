@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,9 +106,13 @@ MonoBehaviour:
   maxHP: 100
   currentHP: 10
   meleeAttack: {fileID: 2200770599266668781, guid: ada5c4bb29aa247e69e1af7d403d6cf3, type: 3}
-  projectile: {fileID: 1272153621244786352, guid: 10fc1afdf87d34067b506d29ba0c2d93, type: 3}
+  meleeDamage: 10
   attackCooldown: 0.1
+  projectile: {fileID: 1272153621244786352, guid: 10fc1afdf87d34067b506d29ba0c2d93, type: 3}
+  lrDamage: 5
   lrCooldown: 3
+  strMultiplier: 1
+  strCooldown: 2
   healAmt: 20
   shieldObject: {fileID: 1272153621244786352, guid: cb72fae1615aa466ba45b7c0661d1c31, type: 3}
   moveSpeed: 5
@@ -301,6 +305,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8ff5f763-c246-4388-858a-c5a41eb0e6df
     m_ActionName: Player/LongRange
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 22015dbb-4695-4119-a31c-60f07a232427
+    m_ActionName: 'Player/Deflect[/Keyboard/q]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -332,7 +340,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &381616504297601929
 BoxCollider2D:
   m_ObjectHideFlags: 0
