@@ -247,6 +247,13 @@ public class Player : MonoBehaviour
 
         // UnityEngine.Debug.Log("Player took " + dmg + " new Player HP: " + currentHP);
         // j so we know it workslol
+        if (shieldActive)
+        {
+            hitSound.volume = 0.25f;
+        } else
+        {
+            hitSound.volume = 1.0f;
+        }
         hitSound.PlayOneShot(hitSoundClip);
 
         if (currentHP <= 0)
