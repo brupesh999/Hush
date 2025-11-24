@@ -4,7 +4,8 @@ public class BasicEnemyProjectile : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     public float damage = 10f; //needs to be public so hit player can access it
-    public Vector3 direction = new Vector3 (-1, 0, 0);
+    public Vector3 direction = new Vector3 (-1, 0, 0);//player also needs to access this
+    private bool isDeflected = false;
 
     void Awake(){
         //when instantiated, grab current direction of the enemy which spawned it (parent)
@@ -42,6 +43,24 @@ public class BasicEnemyProjectile : MonoBehaviour
             player.ApplyDamage(damage);
             Destroy(gameObject);
         }
+
+        // enemy hit
+        if (other.TryGetComponent<BasicEnemy>(out var enemy)){
+            if (isDeflected){
+                enemy.TakeDamage(damage);
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    public void OnDeflected(){
+        isDeflected = true;
+
+        //flip direction
+        direction *= -1;
+
+        //halve damage
+        damage *= 0.5f;
     }
 
 }

@@ -12,8 +12,8 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] private float detectionDistance = 7f;
 
     [Header("Health Settings")]
-    [SerializeField] private int maxHP = 50;
-    private int currentHP;
+    [SerializeField] private float maxHP = 50f;
+    private float currentHP;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -60,7 +60,7 @@ public class BasicEnemy : MonoBehaviour
         }
     }
     
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHP -= damage;
         Debug.Log("Enemy took " + damage + " damage. HP: " + currentHP);

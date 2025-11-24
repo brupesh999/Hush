@@ -3,7 +3,7 @@ using UnityEngine;
 public class BasicPlayerProjectile : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
-    private int damage;
+    private float damage;
     private Vector3 direction = new Vector3 (1, 0, 0);
     private Rigidbody2D rb;
 
@@ -13,7 +13,7 @@ public class BasicPlayerProjectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Init(Transform playerTransform, int damageAmount, Vector3 directionIn)
+    public void Init(Transform playerTransform, float damageAmount, Vector3 directionIn)
     {
         damage = damageAmount;
         direction = directionIn.normalized;

@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private GameObject meleeAttack;
 
     [SerializeField]
-    private int meleeDamage = 10;
+    private float meleeDamage = 10f;
 
     [SerializeField]
     private float attackCooldown = 1f;
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private GameObject projectile;
 
     [SerializeField]
-    private int lrDamage = 5;
+    private float lrDamage = 5f;
 
     [SerializeField]
     private float lrCooldown = 3f;
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     private float strTimer;
 
     [Header("Deflect Settings")]
-    [SerializeField] private float deflectDistance = 0.75f;
+    [SerializeField] private float deflectDistance = 0.5f;
     private List<RaycastHit2D> castResult = new List<RaycastHit2D>();//need this for cast
 
     [Header("Heal Settings")]
@@ -201,19 +201,15 @@ public class Player : MonoBehaviour
         castResult = new List<RaycastHit2D>();
 
         if (gameObject.GetComponent<Collider2D>().Cast(fireDirection, castResult, deflectDistance) > 0){
-
             foreach (RaycastHit2D hitItem in castResult){
-                if (hitItem.transform.gameObject.tag == "EnemyProjectile"){
 
+                if (hitItem.transform.gameObject.tag == "EnemyProjectile"){
                     //make sure projectile is going to hit Player
                     if (hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().direction == fireDirection * -1){
-                        //flip direction
-                        hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().direction *= -1;//this will only work for basic projectiles. if other types are implemented later, will need to be changed
-                        //halve damage of projectile
-                        hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage *= 0.5f;
+                        hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().OnDeflected();
 
-                    //and then deal half damage from projectile to player, if we're doing that.
-                    currentHP -= hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage / 2;
+                    //and then deal half damage from projectile to player
+                    currentHP -= hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage / 2f;
                     }
                 }
             }
