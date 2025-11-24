@@ -4,13 +4,13 @@ public class BasicPlayerMelee : MonoBehaviour
 {
     [SerializeField] private float lifetime = 0.15f; // how long the hitbox lasts
     [SerializeField] private float offset = 0.5f;    // distance from player
-    private int damage;
+    private float damage;
     private Vector3 direction;
     void Start()
     {
         Destroy(gameObject, lifetime); // disappear after short time
     }
-    public void Init(Transform playerTransform, int damageAmount, Vector3 directionIn)
+    public void Init(Transform playerTransform, float damageAmount, Vector3 directionIn)
     {
         damage = damageAmount;
         direction = directionIn.normalized;

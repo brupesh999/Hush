@@ -23,9 +23,9 @@ public class Shield : MonoBehaviour
         Debug.Log("Shield collider touched by: " + other.name);
     }
 
-    public void AbsorbDamage(int damage)
+    public void AbsorbDamage(float damage)
     {
-        int reduced = damage / 2;
+        float reduced = damage / 2;
         Debug.Log("Shield absorbed hit");
         owner.ApplyDamage(reduced);
         Break();

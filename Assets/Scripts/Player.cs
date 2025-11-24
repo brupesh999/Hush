@@ -1,11 +1,13 @@
-using System.Diagnostics;
+//using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
     [Header("Health Settings")]
-    public int maxHP = 100;
+    public float maxHP = 100f;
     public float currentHP;
 
     [Header("Attack Settings")]
@@ -13,7 +15,7 @@ public class Player : MonoBehaviour
     private GameObject meleeAttack;
 
     [SerializeField]
-    private int meleeDamage = 10;
+    private float meleeDamage = 10f;
 
     [SerializeField]
     private float attackCooldown = 1f;
@@ -23,7 +25,7 @@ public class Player : MonoBehaviour
     private GameObject projectile;
 
     [SerializeField]
-    private int lrDamage = 5;
+    private float lrDamage = 5f;
 
     [SerializeField]
     private float lrCooldown = 3f;
@@ -35,6 +37,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float strCooldown = 2f;
     private float strTimer;
+
+    [Header("Deflect Settings")]
+    [SerializeField] private float deflectDistance = 0.5f;
+    private List<RaycastHit2D> castResult = new List<RaycastHit2D>();//need this for cast
 
     [Header("Heal Settings")]
     public int healAmt = 5;
@@ -142,12 +148,6 @@ public class Player : MonoBehaviour
     {
         if (other.contacts.Length > 0 && other.contacts[0].normal.y > 0.5f)
             isGrounded = true;
-
-        // //when hit by enemy projectile, subtract damage from player HP
-        // if (other.gameObject.tag == "EnemyProjectile")
-        // {
-        //     currentHP -= other.gameObject.GetComponent<BasicEnemyProjectile>().damage;
-        // }
     }
 
     public void OnAttack(InputAction.CallbackContext context)
@@ -194,6 +194,28 @@ public class Player : MonoBehaviour
             
         }
     }
+
+    public void OnDeflect(InputAction.CallbackContext context){
+
+        //use cast to find projectiles w/in the defined distance
+        castResult = new List<RaycastHit2D>();
+
+        if (gameObject.GetComponent<Collider2D>().Cast(fireDirection, castResult, deflectDistance) > 0){
+            foreach (RaycastHit2D hitItem in castResult){
+
+                if (hitItem.transform.gameObject.tag == "EnemyProjectile"){
+                    //make sure projectile is going to hit Player
+                    if (hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().direction == fireDirection * -1){
+                        hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().OnDeflected();
+
+                    //and then deal half damage from projectile to player
+                    currentHP -= hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage / 2f;
+                    }
+                }
+            }
+        }
+    }
+
     public void OnShield(InputAction.CallbackContext context)
     {
         if (context.started && !shieldActive)
@@ -239,7 +261,7 @@ public class Player : MonoBehaviour
             shield.Init(this);
     }
 
-    public void ApplyDamage(int dmg)
+    public void ApplyDamage(float dmg)
     {
         // UnityEngine.Debug.Log("ApplyDamage dmg is "+dmg);
         currentHP -= dmg;
