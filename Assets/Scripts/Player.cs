@@ -148,12 +148,6 @@ public class Player : MonoBehaviour
     {
         if (other.contacts.Length > 0 && other.contacts[0].normal.y > 0.5f)
             isGrounded = true;
-
-        // //when hit by enemy projectile, subtract damage from player HP
-        // if (other.gameObject.tag == "EnemyProjectile")
-        // {
-        //     currentHP -= other.gameObject.GetComponent<BasicEnemyProjectile>().damage;
-        // }
     }
 
     public void OnAttack(InputAction.CallbackContext context)
@@ -202,25 +196,25 @@ public class Player : MonoBehaviour
     }
 
     public void OnDeflect(InputAction.CallbackContext context){
-        Debug.Log("Deflect button hit");
 
         //use cast to find projectiles w/in the defined distance
         castResult = new List<RaycastHit2D>();
 
         if (gameObject.GetComponent<Collider2D>().Cast(fireDirection, castResult, deflectDistance) > 0){
 
-            Debug.Log("Found something to deflect");
-
             foreach (RaycastHit2D hitItem in castResult){
                 if (hitItem.transform.gameObject.tag == "EnemyProjectile"){
-                    Debug.Log("Deflect!!!");
-                    //if projectile, flip direction
-                    hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().direction *= -1;//this will only work for basic projectiles. if other types are implemented later, will need to be changed
-                    //halve damage of projectile
-                    hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage *= 0.5f;
+
+                    //make sure projectile is going to hit Player
+                    if (hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().direction == fireDirection * -1){
+                        //flip direction
+                        hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().direction *= -1;//this will only work for basic projectiles. if other types are implemented later, will need to be changed
+                        //halve damage of projectile
+                        hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage *= 0.5f;
 
                     //and then deal half damage from projectile to player, if we're doing that.
                     currentHP -= hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage / 2;
+                    }
                 }
             }
         }
