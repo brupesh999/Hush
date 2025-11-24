@@ -1,11 +1,13 @@
-using System.Diagnostics;
+//using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
     [Header("Health Settings")]
-    public int maxHP = 100;
+    public float maxHP = 100f;
     public float currentHP;
 
     [Header("Attack Settings")]
@@ -35,6 +37,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float strCooldown = 2f;
     private float strTimer;
+
+    [Header("Deflect Settings")]
+    [SerializeField] private float deflectDistance = 0.75f;
+    private List<RaycastHit2D> castResult = new List<RaycastHit2D>();//need this for cast
 
     [Header("Heal Settings")]
     public int healAmt = 5;
@@ -194,6 +200,32 @@ public class Player : MonoBehaviour
             
         }
     }
+
+    public void OnDeflect(InputAction.CallbackContext context){
+        Debug.Log("Deflect button hit");
+
+        //use cast to find projectiles w/in the defined distance
+        castResult = new List<RaycastHit2D>();
+
+        if (gameObject.GetComponent<Collider2D>().Cast(fireDirection, castResult, deflectDistance) > 0){
+
+            Debug.Log("Found something to deflect");
+
+            foreach (RaycastHit2D hitItem in castResult){
+                if (hitItem.transform.gameObject.tag == "EnemyProjectile"){
+                    Debug.Log("Deflect!!!");
+                    //if projectile, flip direction
+                    hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().direction *= -1;//this will only work for basic projectiles. if other types are implemented later, will need to be changed
+                    //halve damage of projectile
+                    hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage *= 0.5f;
+
+                    //and then deal half damage from projectile to player, if we're doing that.
+                    currentHP -= hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage / 2;
+                }
+            }
+        }
+    }
+
     public void OnShield(InputAction.CallbackContext context)
     {
         if (context.started && !shieldActive)
@@ -239,7 +271,7 @@ public class Player : MonoBehaviour
             shield.Init(this);
     }
 
-    public void ApplyDamage(int dmg)
+    public void ApplyDamage(float dmg)
     {
         // UnityEngine.Debug.Log("ApplyDamage dmg is "+dmg);
         currentHP -= dmg;

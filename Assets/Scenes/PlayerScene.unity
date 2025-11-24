@@ -455,7 +455,6 @@ MonoBehaviour:
   emptyHeart: {fileID: 1867641300, guid: c2c26591a61704636b3f13ed3bd382b0, type: 3}
   halfFullHeart: {fileID: 2023413425, guid: c2c26591a61704636b3f13ed3bd382b0, type: 3}
   player: {fileID: 550669387}
-  layoutGroupController: {fileID: 0}
 --- !u!114 &1431759266
 MonoBehaviour:
   m_ObjectHideFlags: 0
