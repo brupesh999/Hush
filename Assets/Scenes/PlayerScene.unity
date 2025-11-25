@@ -822,7 +822,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1090509953}
-  isWalking: 0
 --- !u!4 &1898969086
 Transform:
   m_ObjectHideFlags: 0
