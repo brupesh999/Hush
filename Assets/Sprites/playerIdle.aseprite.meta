@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7c834d6c4a5034e3480b0e44431c3a08
+guid: e1a1f72ec06c74d408e0f8bdbd8ef605
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   previousAsepriteImporterSettings:
-    fileImportMode: 0
+    fileImportMode: 1
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
@@ -85,7 +85,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   asepriteImporterSettings:
-    fileImportMode: 0
+    fileImportMode: 1
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638996126390108780
+  platformSettingsDirtyTick: 0
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: playerWalking-Sheet
+  - name: Frame_0
     originalName: 
-    pivot: {x: 0.5064935, y: -0.04878049}
+    pivot: {x: 0.54838705, y: -0.049382713}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,31 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 231
-      height: 82
-    spriteID: cddbac48773e24e02b8674ac39ae9657
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: -29, y: 0}
-  spriteSheetImportData:
-  - name: playerWalking-Sheet_0
-    originalName: 
-    pivot: {x: 1, y: 0.5}
-    alignment: 5
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 4
       width: 31
       height: 81
-    spriteID: f0fc611bd371d4a84b5331995b0113f6
+    spriteID: a86738935957d4c2d82bf1b45d435340
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -165,20 +143,20 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: playerWalking-Sheet_1
+    uvTransform: {x: 4, y: 4}
+  - name: Frame_1
     originalName: 
-    pivot: {x: 1, y: 0.5}
-    alignment: 5
+    pivot: {x: 0.54838705, y: -0.049999997}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 104
+      x: 43
       y: 4
       width: 31
-      height: 82
-    spriteID: ea3e4ae3f8b9c45ceab9d11ea0e5fa34
+      height: 80
+    spriteID: 0e2e4b6f75f21479f957e79d5d1c34e3
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -186,50 +164,39 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: playerWalking-Sheet_2
-    originalName: 
-    pivot: {x: 1, y: 0.5}
-    alignment: 5
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 204
-      y: 4
-      width: 31
-      height: 81
-    spriteID: 7b95449e2534b4962ac2ebb9db6e0377
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
+    uvTransform: {x: 43, y: 4}
+  spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 1501930436
+      value0: 3063497283
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: playerWalking-Sheet
+    name: playerIdle
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: playerWalking-Sheet
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
-        width: 300
-        height: 100
-      spriteId: cddbac48773e24e02b8674ac39ae9657
+        x: 33
+        y: 4
+        width: 31
+        height: 81
+      spriteId: a86738935957d4c2d82bf1b45d435340
+    - name: Frame_1
+      frameIndex: 1
+      additiveSortOrder: 0
+      cellRect:
+        x: 33
+        y: 4
+        width: 31
+        height: 80
+      spriteId: 0e2e4b6f75f21479f957e79d5d1c34e3
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -245,32 +212,8 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
-  - name: DefaultTexturePlatform
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 16384
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Standalone
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 16384
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 300, y: 100}
-  previousTextureSize: {x: 256, y: 128}
+  canvasSize: {x: 100, y: 100}
+  previousTextureSize: {x: 128, y: 128}
