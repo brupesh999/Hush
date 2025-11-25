@@ -19,6 +19,9 @@ public class BasicEnemy : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
+        if (EnemyManager.Instance != null) {
+            EnemyManager.Instance.RegisterEnemy(this);
+        }
     }
     [Header ("Move-y settings")]
     [SerializeField] private Vector3 spawnPoint = new Vector3(4, -2, 0);//enemy's origin point, movement will center around
@@ -74,6 +77,10 @@ public class BasicEnemy : MonoBehaviour
     void Die()
     {
         Debug.Log("Enemy died!");
+
+        if (EnemyManager.Instance != null) {
+            EnemyManager.Instance.UnregisterEnemy(this);
+        }
 
         //move child projectiles before destroying
         foreach(Transform child in gameObject.GetComponentsInChildren<Transform>()){

@@ -167,7 +167,7 @@ public class Player : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        UnityEngine.Debug.Log("att timer " + lrTimer);
+        // UnityEngine.Debug.Log("att timer " + attTimer);
         if (context.started && attackTimer >= attackCooldown)
         {
             attackTimer = 0f;
