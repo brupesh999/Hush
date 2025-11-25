@@ -28,7 +28,7 @@ public class BasicPlayerMelee : MonoBehaviour
     {
         if (other.TryGetComponent<BasicEnemy>(out var enemy))
         {
-            Debug.Log("Melee hit for " + damage + " damage");
+            // Debug.Log("Melee hit for " + damage + " damage");
             enemy.TakeDamage(damage);
         }
     }

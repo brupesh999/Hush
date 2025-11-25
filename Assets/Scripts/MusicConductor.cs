@@ -10,7 +10,7 @@ public class MusicConductor : MonoBehaviour
     public AudioSource melody;
     public AudioSource chords;
 
-    // Keep these for future use (but not used right now)
+    // not used rn
     [Header("Optional Fills (not used)")]
     public AudioSource fill1;
     public AudioSource fill2;
@@ -73,15 +73,6 @@ public class MusicConductor : MonoBehaviour
 
     void Update()
     {
-        if (EnemyManager.Instance == null)
-        {
-            Debug.Log("EnemyManager not found");
-        }
-        else
-        {
-            Debug.Log("Enemies: " + EnemyManager.Instance.EnemyCount()
-                    + " | Intensity: " + GetEnemyIntensity());
-        }
 
         int samplePosition = (int)((AudioSettings.dspTime - phraseStartDSP) * sampleRate);
 
@@ -108,7 +99,7 @@ public class MusicConductor : MonoBehaviour
     {
         float intensity = GetEnemyIntensity();
 
-        // Turn ON layers (only once when threshold crossed)
+        // turn on layers
         if (!bassActive && intensity >= bassThreshold)
             bassActive = true;
 
@@ -138,8 +129,6 @@ public class MusicConductor : MonoBehaviour
         return Mathf.Clamp01(1f - EnemyManager.Instance.HealthRatio());
     }
 
-    // --- Optional for later use ---
-    // You can use this if you ever want to reintroduce fills
     void ScheduleFillAtNextBar()
     {
         if (fill1 == null && fill2 == null)

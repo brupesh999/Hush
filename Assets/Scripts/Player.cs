@@ -172,6 +172,7 @@ public class Player : MonoBehaviour
         {
             attackTimer = 0f;
             animationController.playAttackAnim();
+            LogAttackBar();
             GameObject attack = Instantiate(
                 meleeAttack,
                 transform.position,
@@ -182,15 +183,16 @@ public class Player : MonoBehaviour
     }
     public void OnLR(InputAction.CallbackContext context)
     {
-        UnityEngine.Debug.Log("lr timer " + lrTimer);
+        // UnityEngine.Debug.Log("lr timer " + lrTimer);
         if (context.started && lrTimer >= lrCooldown)
         {
-            UnityEngine.Debug.Log("long range started");
+            // UnityEngine.Debug.Log("long range started");
             lrTimer = 0f;
 
             float dir = transform.localScale.x > 0 ? 1 : -1;
             Vector3 fireDirection = new Vector3(dir, 0, 0);
             animationController.playAttackAnim();
+            LogAttackBar();
             GameObject lr = Instantiate(
                 projectile,
                 transform.position + fireDirection * 1.2f,
@@ -202,9 +204,11 @@ public class Player : MonoBehaviour
     }
     public void OnStr(InputAction.CallbackContext context)
     {
-        UnityEngine.Debug.Log("str timer " + lrTimer);
+        // UnityEngine.Debug.Log("str timer " + lrTimer);
         if (context.started && strTimer >= strCooldown)
         {
+            animationController.playAttackAnim();
+            LogAttackBar();
             GameObject attack = Instantiate(
                 meleeAttack,
                 transform.position,
@@ -217,15 +221,16 @@ public class Player : MonoBehaviour
 
     public void OnStrLR(InputAction.CallbackContext context)
     {
-        UnityEngine.Debug.Log("str lr timer " + lrTimer);
+        // UnityEngine.Debug.Log("str lr timer " + lrTimer);
         if (context.started && strLRTimer >= strLRCooldown)
         {
-            UnityEngine.Debug.Log("long range started");
+            // UnityEngine.Debug.Log("long range started");
             lrTimer = 0f;
 
             float dir = transform.localScale.x > 0 ? 1 : -1;
             Vector3 fireDirection = new Vector3(dir, 0, 0);
-
+            animationController.playAttackAnim();
+            LogAttackBar();
             GameObject lr = Instantiate(
                 projectile,
                 transform.position + fireDirection * 1.2f,
@@ -286,6 +291,20 @@ public class Player : MonoBehaviour
             // UnityEngine.Debug.Log("heal still on cooldown " + (healCooldown - healTimer) + "seconds left");
         } 
     }
+    void LogAttackBar()
+    {
+        if (MusicConductor.Instance != null)
+        {
+            int bar = MusicConductor.Instance.CurrentBar;
+
+            Debug.Log($"ATTACK on Bar {bar}");
+        }
+        else
+        {
+            Debug.Log("MusicConductor not found");
+        }
+    }
+
 
     void ActivateShield()
     {
