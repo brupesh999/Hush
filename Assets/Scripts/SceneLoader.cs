@@ -8,4 +8,11 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
+
+    public void RestartScene()
+    {
+        Debug.Log("Scene should have restarted");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }
