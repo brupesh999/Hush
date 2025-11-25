@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f4b15d42b172144009ab3a4b4d8ae250
+guid: e1a1f72ec06c74d408e0f8bdbd8ef605
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,32 +131,11 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 43
-      y: 4
-      width: 31
-      height: 81
-    spriteID: 98f893ca7e52d44c7a0742bf8f3ea6ef
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 43, y: 4}
-  - name: Frame_1
-    originalName: 
-    pivot: {x: 0.54838705, y: -0.04878049}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
       x: 4
       y: 4
       width: 31
-      height: 82
-    spriteID: a724982ab98764ad7b5e0bd641268bb7
+      height: 81
+    spriteID: a86738935957d4c2d82bf1b45d435340
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -165,19 +144,19 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_2
+  - name: Frame_1
     originalName: 
-    pivot: {x: 0.54838705, y: -0.049382713}
+    pivot: {x: 0.54838705, y: -0.049999997}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 82
+      x: 43
       y: 4
       width: 31
-      height: 81
-    spriteID: 9608e12d1ac4f48ca956a97a595ccc5b
+      height: 80
+    spriteID: 0e2e4b6f75f21479f957e79d5d1c34e3
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -185,17 +164,17 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 82, y: 4}
+    uvTransform: {x: 43, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 834574786
+      value0: 3063497283
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: playerWalking
+    name: playerIdle
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -208,7 +187,7 @@ ScriptedImporter:
         y: 4
         width: 31
         height: 81
-      spriteId: 98f893ca7e52d44c7a0742bf8f3ea6ef
+      spriteId: a86738935957d4c2d82bf1b45d435340
     - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -216,17 +195,8 @@ ScriptedImporter:
         x: 33
         y: 4
         width: 31
-        height: 82
-      spriteId: a724982ab98764ad7b5e0bd641268bb7
-    - name: Frame_2
-      frameIndex: 2
-      additiveSortOrder: 0
-      cellRect:
-        x: 33
-        y: 4
-        width: 31
-        height: 81
-      spriteId: 9608e12d1ac4f48ca956a97a595ccc5b
+        height: 80
+      spriteId: 0e2e4b6f75f21479f957e79d5d1c34e3
     linkedCells: []
     parentIndex: -1
   platformSettings:

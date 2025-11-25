@@ -76,8 +76,15 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private AudioClip hitSoundClip;
+
+    [Header("Animation Settings")]
+    [SerializeField]
+    private PlayerAnimationController animationController;
+
     private float dir;
     private Vector3 fireDirection;
+
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -121,11 +128,13 @@ public class Player : MonoBehaviour
         // player is walking on ground if there is forward movement but no upward movement
         if (moveInput.x != 0 && rb.linearVelocity.y == 0)
         {
+            animationController.setIsWalking(true);
             if (!footsteps.isPlaying)
                 footsteps.Play();
         }
         else
         {
+            animationController.setIsWalking(false);
             if (footsteps.isPlaying)
                 footsteps.Stop();
         }
@@ -162,7 +171,7 @@ public class Player : MonoBehaviour
         if (context.started && attackTimer >= attackCooldown)
         {
             attackTimer = 0f;
-
+            animationController.playAttackAnim();
             GameObject attack = Instantiate(
                 meleeAttack,
                 transform.position,
@@ -181,7 +190,7 @@ public class Player : MonoBehaviour
 
             float dir = transform.localScale.x > 0 ? 1 : -1;
             Vector3 fireDirection = new Vector3(dir, 0, 0);
-
+            animationController.playAttackAnim();
             GameObject lr = Instantiate(
                 projectile,
                 transform.position + fireDirection * 1.2f,
@@ -301,12 +310,23 @@ public class Player : MonoBehaviour
 
         // UnityEngine.Debug.Log("Player took " + dmg + " new Player HP: " + currentHP);
         // j so we know it workslol
+        if (shieldActive)
+        {
+            hitSound.volume = 0.25f;
+        } else
+        {
+            hitSound.volume = 1.0f;
+        }
         hitSound.PlayOneShot(hitSoundClip);
 
         if (currentHP <= 0)
         {
+            animationController.playDeathAnim();
             // UnityEngine.Debug.Log("Player has died.");
             // need to do some death animation or sth idk
+        } else
+        {
+            animationController.playHitAnim();
         }
     }
 
