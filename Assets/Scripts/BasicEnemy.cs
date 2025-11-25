@@ -12,8 +12,8 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] private float detectionDistance = 7f;
 
     [Header("Health Settings")]
-    [SerializeField] private int maxHP = 50;
-    private int currentHP;
+    [SerializeField] private float maxHP = 50f;
+    private float currentHP;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,6 +31,7 @@ public class BasicEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         timekeeper += Time.deltaTime;//increase timer every update
         
         //if player is w/in distance, shoot 'em!
@@ -60,12 +61,12 @@ public class BasicEnemy : MonoBehaviour
         }
     }
     
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHP -= damage;
         Debug.Log("Enemy took " + damage + " damage. HP: " + currentHP);
         
-        if (currentHP <= 0)
+        if (currentHP <= 0.1)
         {
             Die();
         }
@@ -73,6 +74,13 @@ public class BasicEnemy : MonoBehaviour
     void Die()
     {
         Debug.Log("Enemy died!");
+
+        //move child projectiles before destroying
+        foreach(Transform child in gameObject.GetComponentsInChildren<Transform>()){
+            child.gameObject.transform.SetParent(null);
+        }
+
         Destroy(gameObject);
+       
     }
 }

@@ -1,11 +1,13 @@
-using System.Diagnostics;
+//using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
     [Header("Health Settings")]
-    public int maxHP = 100;
+    public float maxHP = 100f;
     public float currentHP;
 
     [Header("Attack Settings")]
@@ -13,28 +15,36 @@ public class Player : MonoBehaviour
     private GameObject meleeAttack;
 
     [SerializeField]
-    private int meleeDamage = 10;
+    private float meleeDamage = 10f;
 
     [SerializeField]
     private float attackCooldown = 1f;
     private float attackTimer;
 
     [SerializeField]
+    private int strMultiplier = 2;
+
+    [SerializeField]
     private GameObject projectile;
 
     [SerializeField]
-    private int lrDamage = 5;
+    private float lrDamage = 5f;
 
     [SerializeField]
-    private float lrCooldown = 3f;
+    private float lrCooldown = 5f;
     private float lrTimer;
 
     [SerializeField]
-    private int strMultiplier = 1;
+    private float strCooldown = 4f;
+    private float strTimer;
 
     [SerializeField]
-    private float strCooldown = 2f;
-    private float strTimer;
+    private float strLRCooldown = 7f;
+    private float strLRTimer;
+
+    [Header("Deflect Settings")]
+    [SerializeField] private float deflectDistance = 0.5f;
+    private List<RaycastHit2D> castResult = new List<RaycastHit2D>();//need this for cast
 
     [Header("Heal Settings")]
     public int healAmt = 5;
@@ -87,6 +97,7 @@ public class Player : MonoBehaviour
         healTimer = healCooldown;
         lrTimer = lrCooldown;
         strTimer = strCooldown;
+        strLRTimer += strLRCooldown;
     }
 
     void Update()
@@ -96,6 +107,7 @@ public class Player : MonoBehaviour
         healTimer += Time.deltaTime;
         lrTimer += Time.deltaTime;
         strTimer += Time.deltaTime;
+        strLRTimer += Time.deltaTime;
 
         rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
 
@@ -151,16 +163,11 @@ public class Player : MonoBehaviour
     {
         if (other.contacts.Length > 0 && other.contacts[0].normal.y > 0.5f)
             isGrounded = true;
-
-        // //when hit by enemy projectile, subtract damage from player HP
-        // if (other.gameObject.tag == "EnemyProjectile")
-        // {
-        //     currentHP -= other.gameObject.GetComponent<BasicEnemyProjectile>().damage;
-        // }
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        UnityEngine.Debug.Log("att timer " + lrTimer);
         if (context.started && attackTimer >= attackCooldown)
         {
             attackTimer = 0f;
@@ -170,7 +177,7 @@ public class Player : MonoBehaviour
                 transform.position,
                 Quaternion.identity
             );
-            attack.GetComponent<BasicPlayerMelee>().Init(transform, strMultiplier*meleeDamage, fireDirection);
+            attack.GetComponent<BasicPlayerMelee>().Init(transform, meleeDamage, fireDirection);
         }
     }
     public void OnLR(InputAction.CallbackContext context)
@@ -190,19 +197,66 @@ public class Player : MonoBehaviour
                 Quaternion.identity
             );
 
-            lr.GetComponent<BasicPlayerProjectile>().Init(transform, strMultiplier*lrDamage, fireDirection);
+            lr.GetComponent<BasicPlayerProjectile>().Init(transform, lrDamage, fireDirection);
         }
     }
     public void OnStr(InputAction.CallbackContext context)
     {
+        UnityEngine.Debug.Log("str timer " + lrTimer);
         if (context.started && strTimer >= strCooldown)
         {
-            strTimer = 0f;
-
-            strMultiplier = 2;
+            GameObject attack = Instantiate(
+                meleeAttack,
+                transform.position,
+                Quaternion.identity
+            );
+            attack.GetComponent<BasicPlayerMelee>().Init(transform, strMultiplier*meleeDamage, fireDirection);
             
         }
     }
+
+    public void OnStrLR(InputAction.CallbackContext context)
+    {
+        UnityEngine.Debug.Log("str lr timer " + lrTimer);
+        if (context.started && strLRTimer >= strLRCooldown)
+        {
+            UnityEngine.Debug.Log("long range started");
+            lrTimer = 0f;
+
+            float dir = transform.localScale.x > 0 ? 1 : -1;
+            Vector3 fireDirection = new Vector3(dir, 0, 0);
+
+            GameObject lr = Instantiate(
+                projectile,
+                transform.position + fireDirection * 1.2f,
+                Quaternion.identity
+            );
+
+            lr.GetComponent<BasicPlayerProjectile>().Init(transform, lrDamage, strMultiplier*fireDirection);
+        }
+    }
+
+    public void OnDeflect(InputAction.CallbackContext context){
+
+        //use cast to find projectiles w/in the defined distance
+        castResult = new List<RaycastHit2D>();
+
+        if (gameObject.GetComponent<Collider2D>().Cast(fireDirection, castResult, deflectDistance) > 0){
+            foreach (RaycastHit2D hitItem in castResult){
+
+                if (hitItem.transform.gameObject.tag == "EnemyProjectile"){
+                    //make sure projectile is going to hit Player
+                    if (hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().direction == fireDirection * -1){
+                        hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().OnDeflected();
+
+                    //and then deal half damage from projectile to player
+                    currentHP -= hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage / 2f;
+                    }
+                }
+            }
+        }
+    }
+
     public void OnShield(InputAction.CallbackContext context)
     {
         if (context.started && !shieldActive)
@@ -248,7 +302,7 @@ public class Player : MonoBehaviour
             shield.Init(this);
     }
 
-    public void ApplyDamage(int dmg)
+    public void ApplyDamage(float dmg)
     {
         // UnityEngine.Debug.Log("ApplyDamage dmg is "+dmg);
         currentHP -= dmg;

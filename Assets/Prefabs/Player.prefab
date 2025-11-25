@@ -114,6 +114,7 @@ MonoBehaviour:
   lrCooldown: 3
   strMultiplier: 1
   strCooldown: 2
+  deflectDistance: 1
   healAmt: 20
   shieldObject: {fileID: 1272153621244786352, guid: cb72fae1615aa466ba45b7c0661d1c31, type: 3}
   moveSpeed: 5
@@ -307,7 +308,19 @@ MonoBehaviour:
     m_ActionId: 8ff5f763-c246-4388-858a-c5a41eb0e6df
     m_ActionName: Player/LongRange
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -5704947262386727091}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnDeflect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 22015dbb-4695-4119-a31c-60f07a232427
     m_ActionName: 'Player/Deflect[/Keyboard/q]'
   m_NeverAutoSwitchControlSchemes: 0
