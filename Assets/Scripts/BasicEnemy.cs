@@ -66,7 +66,7 @@ public class BasicEnemy : MonoBehaviour
         currentHP -= damage;
         Debug.Log("Enemy took " + damage + " damage. HP: " + currentHP);
         
-        if (currentHP <= 0)
+        if (currentHP <= 0.1)
         {
             Die();
         }
