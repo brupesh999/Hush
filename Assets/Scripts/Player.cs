@@ -66,8 +66,15 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private AudioClip hitSoundClip;
+
+    [Header("Animation Settings")]
+    [SerializeField]
+    private PlayerAnimationController animationController;
+
     private float dir;
     private Vector3 fireDirection;
+
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -258,6 +265,7 @@ public class Player : MonoBehaviour
 
         if (currentHP <= 0)
         {
+
             // UnityEngine.Debug.Log("Player has died.");
             // need to do some death animation or sth idk
         }
