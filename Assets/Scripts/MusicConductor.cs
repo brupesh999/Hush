@@ -73,7 +73,15 @@ public class MusicConductor : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Intensity: " + GetEnemyIntensity());
+        if (EnemyManager.Instance == null)
+        {
+            Debug.Log("EnemyManager not found");
+        }
+        else
+        {
+            Debug.Log("Enemies: " + EnemyManager.Instance.EnemyCount()
+                    + " | Intensity: " + GetEnemyIntensity());
+        }
 
         int samplePosition = (int)((AudioSettings.dspTime - phraseStartDSP) * sampleRate);
 
