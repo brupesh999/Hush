@@ -426,6 +426,10 @@ PrefabInstance:
       propertyPath: footsteps
       value: 
       objectReference: {fileID: 4254663717816256953}
+    - target: {fileID: -5704947262386727091, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
+      propertyPath: animationController
+      value: 
+      objectReference: {fileID: 1898969085}
     - target: {fileID: 259102027492294164, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
       propertyPath: m_Sprite
       value: 

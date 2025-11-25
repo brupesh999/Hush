@@ -116,11 +116,13 @@ public class Player : MonoBehaviour
         // player is walking on ground if there is forward movement but no upward movement
         if (moveInput.x != 0 && rb.linearVelocity.y == 0)
         {
+            animationController.setIsWalking(true);
             if (!footsteps.isPlaying)
                 footsteps.Play();
         }
         else
         {
+            animationController.setIsWalking(false);
             if (footsteps.isPlaying)
                 footsteps.Stop();
         }

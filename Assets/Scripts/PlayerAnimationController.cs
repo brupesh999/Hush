@@ -1,13 +1,11 @@
 using UnityEngine;
+using System.Diagnostics;
 
 public class PlayerAnimationController : MonoBehaviour
 {
 
     [Header("Animator")]
     public Animator animator;
-
-    [Header("Transition Variables")]
-    public bool isWalking; // = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,19 +20,24 @@ public class PlayerAnimationController : MonoBehaviour
     }
 
 
-    void playAttackAnim()
+    public void playAttackAnim()
     {
         animator.SetTrigger("TriggerAttack");
     }
     
-    void playDeathAnim()
+    public void playDeathAnim()
     {
         animator.SetTrigger("TriggerDeath");
     }
 
-    void playHitAnim()
+    public void playHitAnim()
     {
         animator.SetTrigger("TriggerHit");
+    }
+
+    public void setIsWalking(bool val)
+    {
+        animator.SetBool("isWalking", val);
     }
 
 }
