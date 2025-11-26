@@ -5,7 +5,7 @@ public class EnemyManager : MonoBehaviour
 {
    public static EnemyManager Instance;
 
-    private readonly List<BasicEnemy> enemies = new List<BasicEnemy>();
+    private readonly List<Enemy> enemies = new List<Enemy>();
 
     void Awake()
     {
@@ -15,7 +15,7 @@ public class EnemyManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void RegisterEnemy(BasicEnemy enemy)
+    public void RegisterEnemy(Enemy enemy)
     {
         if (enemy == null) return;
 
@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
             enemies.Add(enemy);
     }
 
-    public void UnregisterEnemy(BasicEnemy enemy)
+    public void UnregisterEnemy(Enemy enemy)
     {
         if (enemy == null) return;
 
@@ -34,7 +34,7 @@ public class EnemyManager : MonoBehaviour
     {
         float total = 0f;
 
-        foreach (BasicEnemy e in enemies)
+        foreach (Enemy e in enemies)
         {
             if (e != null)
                 total += e.maxHP;
@@ -47,7 +47,7 @@ public class EnemyManager : MonoBehaviour
     {
         float total = 0f;
 
-        foreach (BasicEnemy e in enemies)
+        foreach (Enemy e in enemies)
         {
             if (e != null)
                 total += e.currentHP;
