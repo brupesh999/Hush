@@ -10,6 +10,14 @@ public class MusicConductor : MonoBehaviour
     public AudioSource melody;
     public AudioSource chords;
 
+    [Header("Attack Note Clips (4 chords)")]
+    public AudioClip[] lowNotes;   // size = 4
+    public AudioClip[] midNotes;   // size = 4
+    public AudioClip[] highNotes;  // size = 4
+
+    [Header("Attack Note Source")]
+public AudioSource sfxSource;
+
     // not used rn
     [Header("Optional Fills (not used)")]
     public AudioSource fill1;
@@ -129,6 +137,31 @@ public class MusicConductor : MonoBehaviour
         return Mathf.Clamp01(1f - EnemyManager.Instance.HealthRatio());
     }
 
+    public void PlayAttackNotes(bool low, bool mid, bool high)
+    {
+        int chord = CurrentChordIndex();
+
+        if (sfxSource == null) return;
+
+        if (low && lowNotes.Length > chord && lowNotes[chord] != null)
+            sfxSource.PlayOneShot(lowNotes[chord]);
+
+        if (mid && midNotes.Length > chord && midNotes[chord] != null)
+            sfxSource.PlayOneShot(midNotes[chord]);
+
+        if (high && highNotes.Length > chord && highNotes[chord] != null)
+            sfxSource.PlayOneShot(highNotes[chord]);
+    }
+
+
+    public int CurrentChordIndex()
+    {
+        int bar = CurrentBar;
+        return bar / 2; // 8 bar phrase but theres 4 chords
+    }
+
+
+    // below ts doesn't work but its super non essential lol pls ignore
     void ScheduleFillAtNextBar()
     {
         if (fill1 == null && fill2 == null)

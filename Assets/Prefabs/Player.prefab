@@ -89,7 +89,7 @@ SpriteRenderer:
   m_Size: {x: 0.36, y: 0.84}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &-5704947262386727091
@@ -109,11 +109,12 @@ MonoBehaviour:
   meleeAttack: {fileID: 2200770599266668781, guid: ada5c4bb29aa247e69e1af7d403d6cf3, type: 3}
   meleeDamage: 10
   attackCooldown: 0.1
+  strMultiplier: 2
   projectile: {fileID: 1272153621244786352, guid: 10fc1afdf87d34067b506d29ba0c2d93, type: 3}
   lrDamage: 5
   lrCooldown: 3
-  strMultiplier: 1
   strCooldown: 2
+  strLRCooldown: 7
   deflectDistance: 1
   healAmt: 20
   shieldObject: {fileID: 1272153621244786352, guid: cb72fae1615aa466ba45b7c0661d1c31, type: 3}
@@ -122,6 +123,7 @@ MonoBehaviour:
   footsteps: {fileID: 0}
   hitSound: {fileID: 0}
   hitSoundClip: {fileID: 8300000, guid: 0fbf5fbb4d3c84c3484937385aa7142e, type: 3}
+  animationController: {fileID: 0}
 --- !u!114 &3105257093465385431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +325,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 22015dbb-4695-4119-a31c-60f07a232427
     m_ActionName: 'Player/Deflect[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ab7c73e1-6de9-4690-bd72-c94f1c3a2f2b
+    m_ActionName: 'Player/Strengthen[/Keyboard/s,/Keyboard/a]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9ddb4058-abe4-4674-808d-10fc65649f6b
+    m_ActionName: 'Player/LRStr[/Keyboard/d,/Keyboard/s,/Keyboard/a]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

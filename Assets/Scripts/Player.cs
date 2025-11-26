@@ -171,8 +171,10 @@ public class Player : MonoBehaviour
         if (context.started && attackTimer >= attackCooldown)
         {
             attackTimer = 0f;
+
             animationController.playAttackAnim();
-            LogAttackBar();
+            PlayChordAttack(true, false, false);
+
             GameObject attack = Instantiate(
                 meleeAttack,
                 transform.position,
@@ -192,7 +194,8 @@ public class Player : MonoBehaviour
             float dir = transform.localScale.x > 0 ? 1 : -1;
             Vector3 fireDirection = new Vector3(dir, 0, 0);
             animationController.playAttackAnim();
-            LogAttackBar();
+            PlayChordAttack(true, false, true);
+
             GameObject lr = Instantiate(
                 projectile,
                 transform.position + fireDirection * 1.2f,
@@ -204,11 +207,12 @@ public class Player : MonoBehaviour
     }
     public void OnStr(InputAction.CallbackContext context)
     {
-        // UnityEngine.Debug.Log("str timer " + lrTimer);
+        UnityEngine.Debug.Log("str timer " + strTimer);
         if (context.started && strTimer >= strCooldown)
         {
             animationController.playAttackAnim();
-            LogAttackBar();
+            PlayChordAttack(true, true, false);
+
             GameObject attack = Instantiate(
                 meleeAttack,
                 transform.position,
@@ -230,7 +234,8 @@ public class Player : MonoBehaviour
             float dir = transform.localScale.x > 0 ? 1 : -1;
             Vector3 fireDirection = new Vector3(dir, 0, 0);
             animationController.playAttackAnim();
-            LogAttackBar();
+            PlayChordAttack(true, true, true);
+
             GameObject lr = Instantiate(
                 projectile,
                 transform.position + fireDirection * 1.2f,
@@ -302,6 +307,14 @@ public class Player : MonoBehaviour
         else
         {
             Debug.Log("MusicConductor not found");
+        }
+    }
+
+    void PlayChordAttack(bool low, bool mid, bool high)
+    {
+        if (MusicConductor.Instance != null)
+        {
+            MusicConductor.Instance.PlayAttackNotes(low, mid, high);
         }
     }
 
