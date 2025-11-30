@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class BossEnemy : MonoBehaviour
+public class BossEnemy : Enemy
 {
     float timekeeper = 0f;//this will count how much time has passed (in s) since enemy has shot a projectile
     
@@ -20,14 +20,15 @@ public class BossEnemy : MonoBehaviour
     [SerializeField] private float meleeDetectionDistance = 1f;
 
     [Header("Health Settings")]
-    [SerializeField] public float maxHP = 300f;
+    public override float maxHP { get {return 300f;}}
     public float currentHP;
 
     [Header ("Position settings")]
-    [SerializeField] private Vector3 spawnPoint = new Vector3(4, -2, 0);//enemy's origin point
-    public Vector3 currentDirection = new Vector3(-1, 0, 0);//currently moving left or right?
+    //current direction and castResult defined in parent class (Enemy)
 
-    //private List<RaycastHit2D> castResult = new List<RaycastHit2D>();
+    protected override Vector3 spawnPoint {get {return new Vector3(4, -2, 0);}} //enemy's origin point, movement will center around
+    protected override float movementDistance {get {return 0f;}}//how far enemy will move from spawnPoint
+    protected override float movementSpeed {get {return 0f;}}
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

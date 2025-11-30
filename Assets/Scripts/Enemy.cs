@@ -6,14 +6,8 @@ public abstract class Enemy : MonoBehaviour
 {
     [Header("Health Settings")]
     // public float maxHP = 50f;
-    protected abstract float maxHP {get;}
+    public abstract float maxHP {get;}
     public float currentHP { get; protected set; }
-
-    // [Header ("Move-y settings")]
-    // [SerializeField] private Vector3 spawnPoint = new Vector3(4, -2, 0);//enemy's origin point, movement will center around
-    // [SerializeField] private float movementDistance = 2f;//how far enemy will move from spawnPoint
-    // [SerializeField] private float movementSpeed = 1f;
-    // public Vector3 currentDirection = new Vector3(-1, 0, 0);//currently moving left or right?
 
     [Header ("Move-y settings")]
     protected abstract Vector3 spawnPoint {get;}//enemy's origin point, movement will center around
@@ -33,7 +27,9 @@ public abstract class Enemy : MonoBehaviour
     }
 
     public void Move(float timeChange){
+        //move appropriate distance
         transform.Translate(currentDirection * movementSpeed * timeChange);
+        //if moved past boundary, flip
         if (Mathf.Abs(transform.position.x - spawnPoint.x) > movementDistance) currentDirection *= -1;
     }
     
