@@ -7,10 +7,14 @@ public class BasicPlayerProjectile : MonoBehaviour
     private Vector3 direction = new Vector3 (1, 0, 0);
     private Rigidbody2D rb;
 
+    private Animator animator;
+
     // Update is called once per frame
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>(); 
+
     }
 
     public void Init(Transform playerTransform, float damageAmount, Vector3 directionIn)
@@ -31,5 +35,15 @@ public class BasicPlayerProjectile : MonoBehaviour
             enemy.TakeDamage(damage);
             Destroy(gameObject);
         }
+    }
+
+    public void playLRAnim()
+    {
+        animator.SetTrigger("launchOrangeAttack");
+    }
+
+    public void playStrengthLRAnim()
+    {
+        animator.SetTrigger("launchBlueAttack");
     }
 }

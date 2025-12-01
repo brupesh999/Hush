@@ -6,12 +6,15 @@ public class BasicPlayerMelee : MonoBehaviour
     [SerializeField] private float offset = 0.5f;    // distance from player
     private float damage;
     private Vector3 direction;
+
+    private Animator animator;
     void Start()
     {
         Destroy(gameObject, lifetime); // disappear after short time
     }
     public void Init(Transform playerTransform, float damageAmount, Vector3 directionIn)
     {
+        animator = GetComponent<Animator>(); 
         damage = damageAmount;
         direction = directionIn.normalized;
 
@@ -31,5 +34,15 @@ public class BasicPlayerMelee : MonoBehaviour
             // Debug.Log("Melee hit for " + damage + " damage");
             enemy.TakeDamage(damage);
         }
+    }
+
+    public void playAttackAnim()
+    {
+        animator.SetTrigger("launchBlueAttack");
+    }
+
+    public void playStrengthAnim()
+    {
+        animator.SetTrigger("launchRedAttack");
     }
 }
