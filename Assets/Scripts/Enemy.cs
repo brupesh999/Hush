@@ -66,7 +66,8 @@ public abstract class Enemy : MonoBehaviour
     public void CreateProjectile(GameObject projectile){
         //slightly offset it from this, and make this object its parent
         //needs to be this object's child so projectile can find direction it needs to go in
-        Instantiate(projectile, transform.position + new Vector3(currentDirection.x * 0.5f, 0, 0), Quaternion.identity, gameObject.transform);
+        GameObject createdProjectile = Instantiate(projectile, transform.position + new Vector3(currentDirection.x * 0.5f, 0, 0), Quaternion.identity, gameObject.transform);
+        //createdProjectile.GetComponent<BasicEnemyProjectile>().SetActive(true);
     }
 
     public void TakeDamage(float damage)

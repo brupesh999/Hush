@@ -147,3 +147,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9f076ec9194c84a837cdfe013a1e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDirection: {x: -1, y: 0, z: 0}
+  projectile: {fileID: 1272153621244786352, guid: 3cc57f15d5be1094ba5d4fdd7c4563b6, type: 3}
+  AoEAttack: {fileID: 0}
+  AoECooldown: 5
+  projectileCooldown: 2
+  meleeCooldown: 1.5
+  overallAttackCooldown: 5
+  AoEDetectionDistance: 10
+  projectileDetectionDistance: 7
+  meleeDetectionDistance: 1
+  currentHP: 0
