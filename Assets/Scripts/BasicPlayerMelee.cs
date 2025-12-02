@@ -36,13 +36,17 @@ public class BasicPlayerMelee : MonoBehaviour
         }
     }
 
-    public void playAttackAnim()
+    public void playAttackAnim(Vector2 playerPos)
     {
+        Debug.Log("blue");
+        transform.position = playerPos + new Vector2(1.5f, 1.0f);
         animator.SetTrigger("launchBlueAttack");
     }
 
-    public void playStrengthAnim()
+    public void playStrengthAnim(Vector2 playerPos)
     {
+        Debug.Log("red");
+        transform.position = playerPos + new Vector2(1.5f, 1.0f);
         animator.SetTrigger("launchRedAttack");
     }
 }

@@ -183,7 +183,7 @@ public class Player : MonoBehaviour
 
             BasicPlayerMelee meleeComponent = attack.GetComponent<BasicPlayerMelee>();
             meleeComponent.Init(transform, meleeDamage, fireDirection);
-            meleeComponent.playAttackAnim();
+            meleeComponent.playAttackAnim(transform.position);
         }
     }
     public void OnLR(InputAction.CallbackContext context)
@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
 
             BasicPlayerProjectile projectileComponent = lr.GetComponent<BasicPlayerProjectile>();
             projectileComponent.Init(transform, lrDamage, fireDirection);
-            projectileComponent.playLRAnim();
+            projectileComponent.playLRAnim(transform.position);
         }
     }
     public void OnStr(InputAction.CallbackContext context)
@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
 
             BasicPlayerMelee meleeComponent = attack.GetComponent<BasicPlayerMelee>();
             meleeComponent.Init(transform, strMultiplier*meleeDamage, fireDirection);
-            meleeComponent.playStrengthAnim();
+            meleeComponent.playStrengthAnim(transform.position);
         }
     }
 
@@ -251,7 +251,7 @@ public class Player : MonoBehaviour
 
             BasicPlayerProjectile projectileComponent = lr.GetComponent<BasicPlayerProjectile>();
             projectileComponent.Init(transform, lrDamage, strMultiplier*fireDirection);
-            projectileComponent.playStrengthLRAnim();
+            projectileComponent.playStrengthLRAnim(transform.position);
         }
     }
 
