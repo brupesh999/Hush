@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SoundMonsterAttack_Clip
+  m_Name: IdleSoundMonster
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,19 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 7228929698450253805, guid: 903b77c1915d042a9a6bfe65a4ae29c2, type: 3}
-    - time: 0.1
-      value: {fileID: -2093129687720392282, guid: 903b77c1915d042a9a6bfe65a4ae29c2, type: 3}
-    - time: 0.2
-      value: {fileID: -8814841114059220754, guid: 903b77c1915d042a9a6bfe65a4ae29c2, type: 3}
-    - time: 0.29000002
-      value: {fileID: -8814841114059220754, guid: 903b77c1915d042a9a6bfe65a4ae29c2, type: 3}
+      value: {fileID: -5646254921190713835, guid: 87d5972eced3c4b39b4ab6fa53f300de, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 100
+  m_SampleRate: 12
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -50,16 +44,13 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 7228929698450253805, guid: 903b77c1915d042a9a6bfe65a4ae29c2, type: 3}
-    - {fileID: -2093129687720392282, guid: 903b77c1915d042a9a6bfe65a4ae29c2, type: 3}
-    - {fileID: -8814841114059220754, guid: 903b77c1915d042a9a6bfe65a4ae29c2, type: 3}
-    - {fileID: -8814841114059220754, guid: 903b77c1915d042a9a6bfe65a4ae29c2, type: 3}
+    - {fileID: -5646254921190713835, guid: 87d5972eced3c4b39b4ab6fa53f300de, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.3
+    m_StopTime: 0.083333336
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -70,7 +61,7 @@ AnimationClip:
     m_LoopBlendPositionY: 0
     m_LoopBlendPositionXZ: 0
     m_KeepOriginalOrientation: 0
-    m_KeepOriginalPositionY: 0
+    m_KeepOriginalPositionY: 1
     m_KeepOriginalPositionXZ: 0
     m_HeightFromFeet: 0
     m_Mirror: 0
