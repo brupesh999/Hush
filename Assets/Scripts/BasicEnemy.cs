@@ -15,9 +15,11 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] public float maxHP = 50f;
     public float currentHP;
 
+    private Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
         currentHP = maxHP;
         if (EnemyManager.Instance != null) {
             EnemyManager.Instance.RegisterEnemy(this);
@@ -52,6 +54,7 @@ public class BasicEnemy : MonoBehaviour
             //slightly offset it from this, and make this object its parent
             //needs to be this object's child so projectile can find direction it needs to go in
             if (foundPlayer && timekeeper >= shootInterval){
+                animator.SetTrigger("TriggerAttack");
                 timekeeper = 0f;
                 Instantiate(projectile, transform.position + new Vector3(currentDirection.x * 0.5f, 0, 0), Quaternion.identity, gameObject.transform);
             }
