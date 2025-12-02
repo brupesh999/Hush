@@ -33,11 +33,6 @@ public class BasicEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        // keep monster at same y position as player
-        Vector2 clampedYPos = transform.position;
-        clampedYPos.y = -3.5f;
-        transform.position = clampedYPos;
-
         timekeeper += Time.deltaTime;//increase timer every update
         
         //if player is w/in distance, shoot 'em!
