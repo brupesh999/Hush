@@ -346,6 +346,7 @@ public class Player : MonoBehaviour
     public void ApplyDamage(float dmg)
     {
         // UnityEngine.Debug.Log("ApplyDamage dmg is "+dmg);
+        //Debug.Log("ApplyDamage called");//DEBUG
         currentHP -= dmg;
         if (currentHP < 0) currentHP = 0;
 
@@ -369,6 +370,7 @@ public class Player : MonoBehaviour
         {
             animationController.playHitAnim();
         }
+        // Debug.Log("Player HP is "+currentHP);//DEBUG - for some reason this wasn't printing but the earlier one was??
     }
 
     // public void OnPlayerHit(int dmg)

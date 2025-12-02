@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class BasicEnemy : MonoBehaviour
+public class BasicEnemy : Enemy
 {
     float timekeeper = 0f;//this will count how much time has passed (in s) since enemy has shot a projectile
     
@@ -12,8 +12,12 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] private float detectionDistance = 7f;
 
     [Header("Health Settings")]
-    [SerializeField] public float maxHP = 50f;
-    public float currentHP;
+    public override float maxHP { get {return 50f;}}
+
+    [Header ("Move-y settings")]
+    protected override Vector3 spawnPoint {get {return new Vector3(4, -2, 0);}} //enemy's origin point, movement will center around
+    protected override float movementDistance {get {return 2f;}}//how far enemy will move from spawnPoint
+    protected override float movementSpeed {get {return 1f;}}
 
     private Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,13 +29,6 @@ public class BasicEnemy : MonoBehaviour
             EnemyManager.Instance.RegisterEnemy(this);
         }
     }
-    [Header ("Move-y settings")]
-    [SerializeField] private Vector3 spawnPoint = new Vector3(4, -2, 0);//enemy's origin point, movement will center around
-    [SerializeField] private float movementDistance = 2f;//how far enemy will move from spawnPoint
-    [SerializeField] private float movementSpeed = 1f;
-    public Vector3 currentDirection = new Vector3(-1, 0, 0);//currently moving left or right?
-
-    private List<RaycastHit2D> castResult = new List<RaycastHit2D>();
 
     // Update is called once per frame
     void Update()
@@ -40,58 +37,20 @@ public class BasicEnemy : MonoBehaviour
         timekeeper += Time.deltaTime;//increase timer every update
         
         //if player is w/in distance, shoot 'em!
-        if (gameObject.GetComponent<Collider2D>().Cast(currentDirection, castResult, detectionDistance) > 0){
+        float playerDistance = DetectPlayer();
 
-            bool foundPlayer = false;
-            foreach (RaycastHit2D hitItem in castResult){
-                if (hitItem.transform.gameObject.tag == "Player"){
-                    foundPlayer = true;
-                    break;
-                }
-            }
+        if (playerDistance >= 0 && playerDistance <= detectionDistance){
 
             //if it's been enough time, instantiate a projectile
-            //slightly offset it from this, and make this object its parent
-            //needs to be this object's child so projectile can find direction it needs to go in
-            if (foundPlayer && timekeeper >= shootInterval){
-                animator.SetTrigger("TriggerAttack");
+            if (timekeeper >= shootInterval){
                 timekeeper = 0f;
-                Vector3 animOffset = new Vector3(0, -0.5f, 0);
-                Instantiate(projectile, transform.position + new Vector3(currentDirection.x * 0.5f, 0, 0) + animOffset, Quaternion.identity, gameObject.transform);
+                CreateProjectile(projectile);
             }
         }
 
         //no player, move back and forth
         else{
-            transform.Translate(currentDirection * movementSpeed * Time.deltaTime);
-            if (Mathf.Abs(transform.position.x - spawnPoint.x) > movementDistance) currentDirection *= -1;
+            Move(Time.deltaTime);
         }
-    }
-    
-    public void TakeDamage(float damage)
-    {
-        currentHP -= damage;
-        Debug.Log("Enemy took " + damage + " damage. HP: " + currentHP);
-        
-        if (currentHP <= 0.1)
-        {
-            Die();
-        }
-    }
-    void Die()
-    {
-        Debug.Log("Enemy died!");
-
-        if (EnemyManager.Instance != null) {
-            EnemyManager.Instance.UnregisterEnemy(this);
-        }
-
-        //move child projectiles before destroying
-        foreach(Transform child in gameObject.GetComponentsInChildren<Transform>()){
-            child.gameObject.transform.SetParent(null);
-        }
-
-        Destroy(gameObject);
-       
     }
 }
