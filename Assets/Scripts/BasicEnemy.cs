@@ -15,7 +15,7 @@ public class BasicEnemy : Enemy
     public override float maxHP { get {return 50f;}}
 
     [Header ("Move-y settings")]
-    protected override Vector3 spawnPoint {get {return new Vector3(4, -2, 0);}} //enemy's origin point, movement will center around
+    protected override Vector3 spawnPoint {get {return new Vector3(4, -4, 0);}} //enemy's origin point, movement will center around
     protected override float movementDistance {get {return 2f;}}//how far enemy will move from spawnPoint
     protected override float movementSpeed {get {return 1f;}}
 
@@ -33,6 +33,10 @@ public class BasicEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
+        // keep monster at same y position as player
+        Vector2 clampedYPos = transform.position;
+        clampedYPos.y = -3.5f;
+        transform.position = clampedYPos;
 
         timekeeper += Time.deltaTime;//increase timer every update
         
