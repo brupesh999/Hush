@@ -10,7 +10,7 @@ public abstract class Enemy : MonoBehaviour
     public float currentHP { get; protected set; }
 
     [Header ("Move-y settings")]
-    protected abstract Vector3 spawnPoint {get;}//enemy's origin point, movement will center around
+    // protected Vector3 spawnPoint { get; set; }//enemy's origin point, movement will center around
     protected abstract float movementDistance {get;}//how far enemy will move from spawnPoint
     protected abstract float movementSpeed {get;}
     public Vector3 currentDirection = new Vector3(-1, 0, 0);//currently moving left or right?
@@ -28,7 +28,7 @@ public abstract class Enemy : MonoBehaviour
         player = GameObject.FindWithTag("Player");//assign player to player variable
     }
 
-    public void Move(float timeChange){
+    public void Move(float timeChange, Vector3 spawnPoint){
         //move appropriate distance
         transform.Translate(currentDirection * movementSpeed * timeChange);
         //if moved past boundary, flip
@@ -74,6 +74,22 @@ public abstract class Enemy : MonoBehaviour
         //slightly offset it from this, and make this object its parent
         CreatePrefab(projectile, transform.position + new Vector3(currentDirection.x * 0.5f, 0, 0));
     }
+
+    protected void PerformMeleeAttack(float meleeDetectionDistance, float meleeAttackDamage){
+
+        //first telegraph attack
+        //DEBUG - some animation here
+
+        //then perform attack
+        //check if player in range
+        float playerDistance = DetectPlayer();
+        //DEBUG - melee attack animation here
+
+        if (playerDistance >= 0 && playerDistance <= meleeDetectionDistance){
+            player.GetComponent<Player>().ApplyDamage(meleeAttackDamage);
+        }
+    }
+
 
     public void TakeDamage(float damage)
     {

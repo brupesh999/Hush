@@ -33,7 +33,7 @@ public class BossEnemy : Enemy
 
     [SerializeField] private float groundYPosition = -4f;//DEBUG - should find this in code, but idk how we're doing the ground rn
 
-    protected override Vector3 spawnPoint {get {return new Vector3(4, -2, 0);}} //enemy's origin point, movement will center around
+    [SerializeField] private Vector3 spawnPoint = new Vector3(4, -4, 0); //enemy's origin point, movement will center around
     protected override float movementDistance {get {return 0f;}}//how far enemy will move from spawnPoint
     protected override float movementSpeed {get {return 0f;}}
 
@@ -68,7 +68,9 @@ public class BossEnemy : Enemy
                 //perform melee attack
                 if (meleeTimekeeper >= meleeCooldown){
                     timekeeper = 0f;
-                    PerformMeleeAttack();
+                    PerformMeleeAttack(meleeDetectionDistance, meleeAttackDamage);
+                    //reset CD timer
+                    meleeTimekeeper = 0;
                 }
             }
 
@@ -76,8 +78,9 @@ public class BossEnemy : Enemy
             else if (playerDistance <= projectileDetectionDistance){
                 if (projectileTimekeeper >= projectileCooldown){
                     timekeeper = 0f;
-                    projectileTimekeeper = 0f;//reset timekeeper - other attacks do this in function definition
                     CreateProjectile(projectile);
+                    //reset CD timer
+                    projectileTimekeeper = 0f;
                 }
             }
             
@@ -87,6 +90,8 @@ public class BossEnemy : Enemy
                 if (AoETimekeeper >= AoECooldown){
                     timekeeper = 0f;
                     PerformAoEAttack();
+                    //reset CD timer
+                    AoETimekeeper = 0;
                 }
             }
 
@@ -94,29 +99,26 @@ public class BossEnemy : Enemy
         }
     }
     
-    private void PerformMeleeAttack(){
+    // private void PerformMeleeAttack(){
 
-        //first telegraph attack
-        //DEBUG - some animation here
+    //     //first telegraph attack
+    //     //DEBUG - some animation here
 
-        //then perform attack
-        //check if player in range
-        float playerDistance = DetectPlayer();
-        //DEBUG - melee attack animation here
+    //     //then perform attack
+    //     //check if player in range
+    //     float playerDistance = DetectPlayer();
+    //     //DEBUG - melee attack animation here
 
-        if (playerDistance >= 0 && playerDistance <= meleeDetectionDistance){
-            player.GetComponent<Player>().ApplyDamage(meleeAttackDamage);
-        }
-        //reset CD timer
-        meleeTimekeeper = 0;
-    }
+    //     if (playerDistance >= 0 && playerDistance <= meleeDetectionDistance){
+    //         player.GetComponent<Player>().ApplyDamage(meleeAttackDamage);
+    //     }
+    //     //reset CD timer
+    //     meleeTimekeeper = 0;
+    // }
 
     private void PerformAoEAttack(){
 
         CreatePrefab(AoEAttack, new Vector3(player.transform.position.x, groundYPosition, 0));
-
-        //reset CD timer
-        AoETimekeeper = 0;
     }
 
 }
