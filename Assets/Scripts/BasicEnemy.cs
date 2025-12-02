@@ -56,7 +56,8 @@ public class BasicEnemy : MonoBehaviour
             if (foundPlayer && timekeeper >= shootInterval){
                 animator.SetTrigger("TriggerAttack");
                 timekeeper = 0f;
-                Instantiate(projectile, transform.position + new Vector3(currentDirection.x * 0.5f, 0, 0), Quaternion.identity, gameObject.transform);
+                Vector3 animOffset = new Vector3(0, -0.5f, 0);
+                Instantiate(projectile, transform.position + new Vector3(currentDirection.x * 0.5f, 0, 0) + animOffset, Quaternion.identity, gameObject.transform);
             }
         }
 
