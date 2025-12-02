@@ -15,6 +15,7 @@ public abstract class Enemy : MonoBehaviour
     protected abstract float movementSpeed {get;}
     public Vector3 currentDirection = new Vector3(-1, 0, 0);//currently moving left or right?
 
+    protected GameObject player;
     private List<RaycastHit2D> castResult = new List<RaycastHit2D>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,6 +25,7 @@ public abstract class Enemy : MonoBehaviour
         if (EnemyManager.Instance != null) {
             EnemyManager.Instance.RegisterEnemy(this);
         }
+        player = GameObject.FindWithTag("Player");//assign player to player variable
     }
 
     public void Move(float timeChange){
@@ -38,7 +40,7 @@ public abstract class Enemy : MonoBehaviour
         //if Player is found, return distance to player
         //if no player found, return -1
 
-        //debug - do I need to reset the castResult list before casting?
+        //debug - do I need to reset the castResult list before casting? it seems not
 
         bool foundPlayer = false;
         GameObject player = gameObject;
@@ -63,11 +65,14 @@ public abstract class Enemy : MonoBehaviour
         
     }
 
+    public void CreatePrefab(GameObject prefab, Vector3 spawnLocation){
+        //needs to be this object's child so projectile can find direction it needs to go in
+        GameObject createdProjectile = Instantiate(prefab, spawnLocation, Quaternion.identity, gameObject.transform);
+    }
+
     public void CreateProjectile(GameObject projectile){
         //slightly offset it from this, and make this object its parent
-        //needs to be this object's child so projectile can find direction it needs to go in
-        GameObject createdProjectile = Instantiate(projectile, transform.position + new Vector3(currentDirection.x * 0.5f, 0, 0), Quaternion.identity, gameObject.transform);
-        //createdProjectile.GetComponent<BasicEnemyProjectile>().SetActive(true);
+        CreatePrefab(projectile, transform.position + new Vector3(currentDirection.x * 0.5f, 0, 0));
     }
 
     public void TakeDamage(float damage)

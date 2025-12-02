@@ -9,24 +9,29 @@ public class BossEnemy : Enemy
     float meleeTimekeeper = 0f;//how much time has passed (in s) since enemy has performed melee attack
     float AoETimekeeper = 0f;//same for AoE attack
 
-    [Header ("Attack settings")]
+    [Header ("Prefabs")]
     [SerializeField] private GameObject projectile;
     [SerializeField] private GameObject AoEAttack;
 
+    [Header ("Cooldowns")]
     [SerializeField] private float AoECooldown = 5f;
     [SerializeField] private float projectileCooldown = 2f;
     [SerializeField] private float meleeCooldown = 1.5f;
     [SerializeField] private float overallAttackCooldown = 1f;
 
+    [Header ("Distances for attacks")]
     [SerializeField] private float AoEDetectionDistance = 10f;
     [SerializeField] private float projectileDetectionDistance = 7f;
-    [SerializeField] private float meleeDetectionDistance = 1f;
+    [SerializeField] private float meleeDetectionDistance = 3f;
 
-    [Header("Health Settings")]
+    [Header ("Damage & Health")]
+    [SerializeField] private float meleeAttackDamage = 30f;
     public override float maxHP { get {return 300f;}}
 
     [Header ("Position settings")]
     //current direction and castResult defined in parent class (Enemy)
+
+    [SerializeField] private float groundYPosition = -4f;//DEBUG - should find this in code, but idk how we're doing the ground rn
 
     protected override Vector3 spawnPoint {get {return new Vector3(4, -2, 0);}} //enemy's origin point, movement will center around
     protected override float movementDistance {get {return 0f;}}//how far enemy will move from spawnPoint
@@ -90,13 +95,28 @@ public class BossEnemy : Enemy
     }
     
     private void PerformMeleeAttack(){
-        //unimplemented currently
-        Debug.Log("Boss melee attack!");
+
+        //first telegraph attack
+        //DEBUG - some animation here
+
+        //then perform attack
+        //check if player in range
+        float playerDistance = DetectPlayer();
+        //DEBUG - melee attack animation here
+
+        if (playerDistance >= 0 && playerDistance <= meleeDetectionDistance){
+            player.GetComponent<Player>().ApplyDamage(meleeAttackDamage);
+        }
+        //reset CD timer
+        meleeTimekeeper = 0;
     }
 
     private void PerformAoEAttack(){
-        //unimplemented currently
-        Debug.Log("Boss AoE attack!");
+
+        CreatePrefab(AoEAttack, new Vector3(player.transform.position.x, groundYPosition, 0));
+
+        //reset CD timer
+        AoETimekeeper = 0;
     }
 
 }
