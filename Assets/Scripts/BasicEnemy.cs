@@ -19,9 +19,11 @@ public class BasicEnemy : Enemy
     protected override float movementDistance {get {return 2f;}}//how far enemy will move from spawnPoint
     protected override float movementSpeed {get {return 1f;}}
 
+    private Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
         currentHP = maxHP;
         if (EnemyManager.Instance != null) {
             EnemyManager.Instance.RegisterEnemy(this);

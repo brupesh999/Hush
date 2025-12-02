@@ -180,7 +180,10 @@ public class Player : MonoBehaviour
                 transform.position,
                 Quaternion.identity
             );
-            attack.GetComponent<BasicPlayerMelee>().Init(transform, meleeDamage, fireDirection);
+
+            BasicPlayerMelee meleeComponent = attack.GetComponent<BasicPlayerMelee>();
+            meleeComponent.Init(transform, meleeDamage, fireDirection);
+            meleeComponent.playAttackAnim(transform.position);
         }
     }
     public void OnLR(InputAction.CallbackContext context)
@@ -202,7 +205,9 @@ public class Player : MonoBehaviour
                 Quaternion.identity
             );
 
-            lr.GetComponent<BasicPlayerProjectile>().Init(transform, lrDamage, fireDirection);
+            BasicPlayerProjectile projectileComponent = lr.GetComponent<BasicPlayerProjectile>();
+            projectileComponent.Init(transform, lrDamage, fireDirection);
+            projectileComponent.playLRAnim(transform.position);
         }
     }
     public void OnStr(InputAction.CallbackContext context)
@@ -218,8 +223,10 @@ public class Player : MonoBehaviour
                 transform.position,
                 Quaternion.identity
             );
-            attack.GetComponent<BasicPlayerMelee>().Init(transform, strMultiplier*meleeDamage, fireDirection);
-            
+
+            BasicPlayerMelee meleeComponent = attack.GetComponent<BasicPlayerMelee>();
+            meleeComponent.Init(transform, strMultiplier*meleeDamage, fireDirection);
+            meleeComponent.playStrengthAnim(transform.position);
         }
     }
 
@@ -242,7 +249,9 @@ public class Player : MonoBehaviour
                 Quaternion.identity
             );
 
-            lr.GetComponent<BasicPlayerProjectile>().Init(transform, lrDamage, strMultiplier*fireDirection);
+            BasicPlayerProjectile projectileComponent = lr.GetComponent<BasicPlayerProjectile>();
+            projectileComponent.Init(transform, lrDamage, strMultiplier*fireDirection);
+            projectileComponent.playStrengthLRAnim(transform.position);
         }
     }
 
