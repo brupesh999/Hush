@@ -317,10 +317,9 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4, y: -2.5, z: 0}
-  m_LocalScale: {x: 15.1787, y: 15.1787, z: 15.1787}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1009231380275827865}
+  m_LocalScale: {x: 2.413717, y: 2.413717, z: 2.413717}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &259102027492294164
@@ -368,7 +367,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -5646254921190713835, guid: 87d5972eced3c4b39b4ab6fa53f300de, type: 3}
-  m_Color: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
+  m_Color: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -390,6 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587b62be399c007488be291e07108b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDirection: {x: -1, y: 0, z: 0}
   projectile: {fileID: 1272153621244786352, guid: 3cc57f15d5be1094ba5d4fdd7c4563b6, type: 3}
   shootInterval: 1
   detectionDistance: 7

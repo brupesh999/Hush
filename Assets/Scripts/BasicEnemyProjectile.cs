@@ -10,7 +10,7 @@ public class BasicEnemyProjectile : MonoBehaviour
     void Awake(){
         //when instantiated, grab current direction of the enemy which spawned it (parent)
         GameObject ParentEnemy = transform.parent.gameObject;
-        direction = ParentEnemy.GetComponent<BasicEnemy>().currentDirection;
+        direction = ParentEnemy.GetComponent<Enemy>().currentDirection;
     }
 
     // Update is called once per frame
