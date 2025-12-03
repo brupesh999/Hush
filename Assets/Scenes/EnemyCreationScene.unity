@@ -207,6 +207,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IntermediateEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7530280782213384557, guid: 5244f744ff688704f9eb9247dec42b9b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

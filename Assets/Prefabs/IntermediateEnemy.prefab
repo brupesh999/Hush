@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDirection: {x: -1, y: 0, z: 0}
-  projectile: {fileID: 1272153621244786352, guid: 3cc57f15d5be1094ba5d4fdd7c4563b6, type: 3}
+  projectile: {fileID: 1272153621244786352, guid: 5df2ce93cab83744ca3f62351f820611, type: 3}
   meleeAttackDamage: 20
   overallAttackCooldown: 1
   meleeCooldown: 4
@@ -446,6 +446,7 @@ MonoBehaviour:
   projectileDetectionDistance: 8
   meleeDetectionDistance: 3
   dashDetectionDistance: 5
+  spawnPoint: {x: 4, y: -4, z: 0}
   dashStep: 3
 --- !u!1 &7768847276621598159
 GameObject:
@@ -549,5 +550,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127b1b2af2bca4c919e67aaf22cf527b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 5096147518268374153}
   slider: {fileID: 6165379250911320136}

@@ -45,7 +45,7 @@ public class BasicEnemyProjectile : MonoBehaviour
         }
 
         // enemy hit
-        if (other.TryGetComponent<BasicEnemy>(out var enemy)){
+        if (other.TryGetComponent<Enemy>(out var enemy)){
             if (isDeflected){
                 enemy.TakeDamage(damage);
                 Destroy(gameObject);
