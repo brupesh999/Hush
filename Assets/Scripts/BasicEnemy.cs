@@ -15,7 +15,7 @@ public class BasicEnemy : Enemy
     public override float maxHP { get {return 50f;}}
 
     [Header ("Move-y settings")]
-    [SerializeField] private Vector3 spawnPoint = new Vector3(4, -4, 0); //enemy's origin point, movement will center around
+    [SerializeField] private Vector3 spawnPoint = new Vector3(4, 0, 0); //enemy's origin point, movement will center around
     protected override float movementDistance {get {return 2f;}}//how far enemy will move from spawnPoint
     protected override float movementSpeed {get {return 1f;}}
 

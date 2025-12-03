@@ -29,10 +29,21 @@ public abstract class Enemy : MonoBehaviour
     }
 
     public void Move(float timeChange, Vector3 spawnPoint){
-        //move appropriate distance
-        transform.Translate(currentDirection * movementSpeed * timeChange);
-        //if moved past boundary, flip
-        if (Mathf.Abs(transform.position.x - spawnPoint.x) > movementDistance) currentDirection *= -1;
+        Vector3 movement = currentDirection * movementSpeed * timeChange;
+
+        //check if movement will be too far
+        if (Mathf.Abs(transform.position.x + movement.x - spawnPoint.x) > movementDistance) {
+            //only move up to boundary
+            Vector3 endPoint = spawnPoint + currentDirection * movementDistance;
+            transform.Translate(endPoint - transform.position);
+            //flip direction
+            currentDirection *= -1;
+        }
+        else{
+            //move full distance
+            transform.Translate(movement);
+        }
+
     }
     
     public float DetectPlayer(){

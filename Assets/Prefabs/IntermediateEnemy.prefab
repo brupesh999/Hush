@@ -446,7 +446,7 @@ MonoBehaviour:
   projectileDetectionDistance: 8
   meleeDetectionDistance: 3
   dashDetectionDistance: 5
-  spawnPoint: {x: 4, y: -4, z: 0}
+  spawnPoint: {x: 4, y: 0, z: 0}
   dashStep: 3
 --- !u!1 &7768847276621598159
 GameObject:
