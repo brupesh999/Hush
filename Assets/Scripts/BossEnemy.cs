@@ -37,9 +37,12 @@ public class BossEnemy : Enemy
     protected override float movementDistance {get {return 0f;}}//how far enemy will move from spawnPoint
     protected override float movementSpeed {get {return 0f;}}
 
+    private Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
         currentHP = maxHP;
         if (EnemyManager.Instance != null) {
             EnemyManager.Instance.RegisterEnemy(this);
@@ -58,6 +61,12 @@ public class BossEnemy : Enemy
 
         float playerDistance = DetectPlayer();
 
+        if (currentHP <= 0)
+        {
+            animator.SetBool("isDead", true);
+            return;
+        }
+
         //attacks are split both by player distance and by attack cooldown
 
         if (timekeeper >= overallAttackCooldown){
@@ -68,6 +77,7 @@ public class BossEnemy : Enemy
                 //perform melee attack
                 if (meleeTimekeeper >= meleeCooldown){
                     timekeeper = 0f;
+                    animator.SetTrigger("TriggerAttack");
                     PerformMeleeAttack(meleeDetectionDistance, meleeAttackDamage);
                     //reset CD timer
                     meleeTimekeeper = 0;
@@ -78,6 +88,7 @@ public class BossEnemy : Enemy
             else if (playerDistance <= projectileDetectionDistance){
                 if (projectileTimekeeper >= projectileCooldown){
                     timekeeper = 0f;
+                    animator.SetTrigger("TriggerAttack");
                     CreateProjectile(projectile);
                     //reset CD timer
                     projectileTimekeeper = 0f;
@@ -89,6 +100,7 @@ public class BossEnemy : Enemy
             else if (playerDistance <= AoEDetectionDistance){
                 if (AoETimekeeper >= AoECooldown){
                     timekeeper = 0f;
+                    animator.SetTrigger("TriggerAttack");
                     PerformAoEAttack();
                     //reset CD timer
                     AoETimekeeper = 0;

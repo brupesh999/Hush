@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 259102027492294164}
   - component: {fileID: 1055575885864414249}
   - component: {fileID: 264352513868295723}
+  - component: {fileID: 4608473842425146814}
   m_Layer: 0
   m_Name: BossEnemy
   m_TagString: Enemy
@@ -79,8 +80,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5646254921190713835, guid: 87d5972eced3c4b39b4ab6fa53f300de, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 8824389556528078017, guid: 1038d4c60adaf4163b2fcaf5102c5035, type: 3}
+  m_Color: {r: 1, g: 0.9669811, b: 0.9669811, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -128,7 +129,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.61, y: 0.73}
+    oldSize: {x: 2.03, y: 1.88}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -161,6 +162,28 @@ MonoBehaviour:
   meleeAttackDamage: 30
   groundYPosition: -4
   spawnPoint: {x: 7, y: 0, z: 0}
+--- !u!95 &4608473842425146814
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7530280782213384557}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ecce2e869e42c4dbbab5e97e9bc33948, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7759849945720157942
 GameObject:
   m_ObjectHideFlags: 0
