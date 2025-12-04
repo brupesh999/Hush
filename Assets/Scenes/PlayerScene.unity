@@ -1654,7 +1654,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5704947262386727091, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
       propertyPath: maxHP
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -5704947262386727091, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
       propertyPath: hitSound
@@ -1662,7 +1662,7 @@ PrefabInstance:
       objectReference: {fileID: 7638919194356378432}
     - target: {fileID: -5704947262386727091, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
       propertyPath: currentHP
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -5704947262386727091, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
       propertyPath: footsteps
