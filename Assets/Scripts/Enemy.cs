@@ -18,6 +18,10 @@ public abstract class Enemy : MonoBehaviour
     protected GameObject player;
     private List<RaycastHit2D> castResult = new List<RaycastHit2D>();
 
+    [Header("Attack Settings")]
+    [SerializeField] private GameObject meleeAttack;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -86,19 +90,12 @@ public abstract class Enemy : MonoBehaviour
         CreatePrefab(projectile, transform.position + new Vector3(currentDirection.x * 0.5f, 0, 0));
     }
 
+
     protected void PerformMeleeAttack(float meleeDetectionDistance, float meleeAttackDamage){
+        Debug.Log("Meleeing");
 
-        //first telegraph attack
-        //DEBUG - some animation here
+        CreatePrefab(meleeAttack, transform.position + new Vector3(-meleeDetectionDistance*3/4, 0, 0));
 
-        //then perform attack
-        //check if player in range
-        float playerDistance = DetectPlayer();
-        //DEBUG - melee attack animation here
-
-        if (playerDistance >= 0 && playerDistance <= meleeDetectionDistance){
-            player.GetComponent<Player>().ApplyDamage(meleeAttackDamage);
-        }
     }
 
 

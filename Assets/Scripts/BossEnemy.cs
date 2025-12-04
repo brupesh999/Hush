@@ -26,7 +26,7 @@ public class BossEnemy : Enemy
 
     [Header ("Damage & Health")]
     [SerializeField] private float meleeAttackDamage = 30f;
-    public override float maxHP { get {return 5f;}}
+    public override float maxHP { get {return 300f;}}
 
     [Header ("Position settings")]
     //current direction and castResult defined in parent class (Enemy)
@@ -105,26 +105,10 @@ public class BossEnemy : Enemy
         }
     }
 
-    // private void PerformMeleeAttack(){
-
-    //     //first telegraph attack
-    //     //DEBUG - some animation here
-
-    //     //then perform attack
-    //     //check if player in range
-    //     float playerDistance = DetectPlayer();
-    //     //DEBUG - melee attack animation here
-
-    //     if (playerDistance >= 0 && playerDistance <= meleeDetectionDistance){
-    //         player.GetComponent<Player>().ApplyDamage(meleeAttackDamage);
-    //     }
-    //     //reset CD timer
-    //     meleeTimekeeper = 0;
-    // }
-
     private void PerformAoEAttack(){
 
         CreatePrefab(AoEAttack, new Vector3(player.transform.position.x, groundYPosition, 0));
     }
+
 
 }

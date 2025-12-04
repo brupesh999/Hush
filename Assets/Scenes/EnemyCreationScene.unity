@@ -814,22 +814,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1055575885864414249, guid: 699d2b1a5042a8140975948f2ba78b43, type: 3}
-      propertyPath: m_Size.x
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1055575885864414249, guid: 699d2b1a5042a8140975948f2ba78b43, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1055575885864414249, guid: 699d2b1a5042a8140975948f2ba78b43, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.049259424
-      objectReference: {fileID: 0}
-    - target: {fileID: 1055575885864414249, guid: 699d2b1a5042a8140975948f2ba78b43, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.13946578
-      objectReference: {fileID: 0}
+    - target: {fileID: 264352513868295723, guid: 699d2b1a5042a8140975948f2ba78b43, type: 3}
+      propertyPath: meleeAttack
+      value: 
+      objectReference: {fileID: 29309149845838319, guid: 38691b51d06144aa0b6ae2ffc3b8eedd, type: 3}
     - target: {fileID: 4656481457542548276, guid: 699d2b1a5042a8140975948f2ba78b43, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.1802
@@ -875,7 +863,8 @@ PrefabInstance:
       value: BossEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1648256695857689844, guid: 699d2b1a5042a8140975948f2ba78b43, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 699d2b1a5042a8140975948f2ba78b43, type: 3}

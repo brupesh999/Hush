@@ -393,6 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDirection: {x: -1, y: 0, z: 0}
+  meleeAttack: {fileID: 29309149845838319, guid: 38691b51d06144aa0b6ae2ffc3b8eedd, type: 3}
   projectile: {fileID: 1272153621244786352, guid: 3cc57f15d5be1094ba5d4fdd7c4563b6, type: 3}
   shootInterval: 1
   detectionDistance: 7

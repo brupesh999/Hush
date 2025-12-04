@@ -438,6 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDirection: {x: -1, y: 0, z: 0}
+  meleeAttack: {fileID: 29309149845838319, guid: 38691b51d06144aa0b6ae2ffc3b8eedd, type: 3}
   projectile: {fileID: 1272153621244786352, guid: 5df2ce93cab83744ca3f62351f820611, type: 3}
   meleeAttackDamage: 20
   overallAttackCooldown: 1
