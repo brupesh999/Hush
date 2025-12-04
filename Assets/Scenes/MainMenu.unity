@@ -295,18 +295,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Credits:
-
-
-    Health bar icons were sourced from NicoleMarieT on Itch.io
-
-
-    Project
-    was created by Bhadra Rupesh, Dani Slavin, Emma Wang, Jing Xuan Sun, Joshua Oki,
-    and Mairin O''Shaughnessy
-
-
-'
+  m_text: "Credits:\n\nPlayer health hearts were sourced from NicoleMarieT on Itch.io\n\nFootsteps
+    were sourced by \n\nProject was created by Bhadra Rupesh, Dani Slavin, Emma Wang,
+    Jing Xuan Sun, Joshua Oki, and Mairin O'Shaughnessy\n\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
