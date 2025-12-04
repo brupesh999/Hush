@@ -2,21 +2,24 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class AoEAttack : MonoBehaviour
+public class BasicEnemyMelee : MonoBehaviour
 {
 
-    [SerializeField] private float secAttackDelay = 3f;
-    [SerializeField] private float attackRange = 2f;
-    [SerializeField] private float secAnimationLength = 1f;//DEBUG - not sure if this will be needed once an animation is added
-    [SerializeField] public float damage = 15f;
-
+    [SerializeField] private float secAttackDelay = 0.1f;
+    [SerializeField] private float secAttackDuration = 0.1f;
+    [SerializeField] public float damage = 10f;
+    [SerializeField] private float attackRange = 3f;
     private List<RaycastHit2D> castResult = new List<RaycastHit2D>();
 
-    void Awake(){
-        //should be instantiated below the player position, on ground
-
-        //wait secAttackDelay seconds, then attack player
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake()
+    {   
         StartCoroutine(Attack());
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
     private IEnumerator Attack(){
@@ -48,12 +51,11 @@ public class AoEAttack : MonoBehaviour
         if (foundPlayer){
             player.GetComponent<Player>().ApplyDamage(damage);
         }
-
     }
 
     private IEnumerator Disappear(){
         //wait animation length
-        yield return new WaitForSeconds(secAnimationLength);
+        yield return new WaitForSeconds(secAttackDuration);
 
         //disappear
         Destroy(gameObject);

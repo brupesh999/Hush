@@ -42,6 +42,7 @@ public class BasicEnemy : Enemy
 
             //if it's been enough time, instantiate a projectile
             if (timekeeper >= shootInterval){
+                animator.SetTrigger("TriggerAttack");
                 timekeeper = 0f;
                 CreateProjectile(projectile);
             }

@@ -37,9 +37,13 @@ public class BossEnemy : Enemy
     protected override float movementDistance {get {return 0f;}}//how far enemy will move from spawnPoint
     protected override float movementSpeed {get {return 0f;}}
 
+    private Animator animator;
+    [SerializeField] private float secDeathAnimationLength = 1.4f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
         currentHP = maxHP;
         if (EnemyManager.Instance != null) {
             EnemyManager.Instance.RegisterEnemy(this);
@@ -68,6 +72,7 @@ public class BossEnemy : Enemy
                 //perform melee attack
                 if (meleeTimekeeper >= meleeCooldown){
                     timekeeper = 0f;
+                    animator.SetTrigger("TriggerAttack");
                     PerformMeleeAttack(meleeDetectionDistance, meleeAttackDamage);
                     //reset CD timer
                     meleeTimekeeper = 0;
@@ -78,6 +83,7 @@ public class BossEnemy : Enemy
             else if (playerDistance <= projectileDetectionDistance){
                 if (projectileTimekeeper >= projectileCooldown){
                     timekeeper = 0f;
+                    animator.SetTrigger("TriggerAttack");
                     CreateProjectile(projectile);
                     //reset CD timer
                     projectileTimekeeper = 0f;
@@ -89,6 +95,7 @@ public class BossEnemy : Enemy
             else if (playerDistance <= AoEDetectionDistance){
                 if (AoETimekeeper >= AoECooldown){
                     timekeeper = 0f;
+                    animator.SetTrigger("TriggerAttack");
                     PerformAoEAttack();
                     //reset CD timer
                     AoETimekeeper = 0;
@@ -98,27 +105,38 @@ public class BossEnemy : Enemy
             //if >10 or <1 (-1 for if it can't see the player), then do nothing
         }
     }
-    
-    // private void PerformMeleeAttack(){
-
-    //     //first telegraph attack
-    //     //DEBUG - some animation here
-
-    //     //then perform attack
-    //     //check if player in range
-    //     float playerDistance = DetectPlayer();
-    //     //DEBUG - melee attack animation here
-
-    //     if (playerDistance >= 0 && playerDistance <= meleeDetectionDistance){
-    //         player.GetComponent<Player>().ApplyDamage(meleeAttackDamage);
-    //     }
-    //     //reset CD timer
-    //     meleeTimekeeper = 0;
-    // }
 
     private void PerformAoEAttack(){
 
         CreatePrefab(AoEAttack, new Vector3(player.transform.position.x, groundYPosition, 0));
     }
+
+    public override void Die()
+    {
+        Debug.Log("Boss Enemy died!");
+
+        if (EnemyManager.Instance != null) {
+            EnemyManager.Instance.UnregisterEnemy(this);
+        }
+
+        //move child projectiles before destroying
+        foreach(Transform child in gameObject.GetComponentsInChildren<Transform>()){
+            child.gameObject.transform.SetParent(null);
+        }
+
+
+        StartCoroutine(DeathAnimation());
+    }
+
+    private IEnumerator DeathAnimation(){
+
+        animator.SetBool("isDead",true);
+
+        yield return new WaitForSeconds(secDeathAnimationLength);
+
+        Destroy(gameObject);
+
+    }
+
 
 }
