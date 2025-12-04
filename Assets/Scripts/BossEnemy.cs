@@ -38,6 +38,7 @@ public class BossEnemy : Enemy
     protected override float movementSpeed {get {return 0f;}}
 
     private Animator animator;
+    [SerializeField] private float secDeathAnimationLength = 1.4f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -126,5 +127,33 @@ public class BossEnemy : Enemy
 
         CreatePrefab(AoEAttack, new Vector3(player.transform.position.x, groundYPosition, 0));
     }
+
+    public override void Die()
+    {
+        Debug.Log("Boss Enemy died!");
+
+        if (EnemyManager.Instance != null) {
+            EnemyManager.Instance.UnregisterEnemy(this);
+        }
+
+        //move child projectiles before destroying
+        foreach(Transform child in gameObject.GetComponentsInChildren<Transform>()){
+            child.gameObject.transform.SetParent(null);
+        }
+
+
+        StartCoroutine(DeathAnimation());
+    }
+
+    private IEnumerator DeathAnimation(){
+
+        animator.SetBool("isDead",true);
+
+        yield return new WaitForSeconds(secDeathAnimationLength);
+
+        Destroy(gameObject);
+
+    }
+
 
 }

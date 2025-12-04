@@ -113,7 +113,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public void Die()
+    public virtual void Die()
     {
         Debug.Log("Enemy died!");
 
