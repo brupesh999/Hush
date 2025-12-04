@@ -25,7 +25,7 @@ public class AoEAttack : MonoBehaviour
 
         //then attack
         //visual indicator
-        gameObject.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 55f);//debug - this shouldn't be necessary after animations added
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 255f); // easier to time things if changed in code rather than anim
 
         //find player
         bool foundPlayer = false;
