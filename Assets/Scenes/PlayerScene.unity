@@ -1772,7 +1772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartPrefab: {fileID: 6053039676777641293, guid: 7423cd4ec85b24dd48df5e1fca04a4f4, type: 3}
-  healthPerHeart: 200
+  healthPerHeart: 20
   fullHeart: {fileID: 1109063772672943838, guid: c2c26591a61704636b3f13ed3bd382b0, type: 3}
   emptyHeart: {fileID: 1867641300, guid: c2c26591a61704636b3f13ed3bd382b0, type: 3}
   halfFullHeart: {fileID: 2023413425, guid: c2c26591a61704636b3f13ed3bd382b0, type: 3}
