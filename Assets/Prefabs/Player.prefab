@@ -372,11 +372,35 @@ MonoBehaviour:
     m_ActionId: 22015dbb-4695-4119-a31c-60f07a232427
     m_ActionName: 'Player/Deflect[/Keyboard/q]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -5704947262386727091}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnStr
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: ab7c73e1-6de9-4690-bd72-c94f1c3a2f2b
     m_ActionName: 'Player/Strengthen[/Keyboard/s,/Keyboard/a]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -5704947262386727091}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnStrLR
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 9ddb4058-abe4-4674-808d-10fc65649f6b
     m_ActionName: 'Player/LRStr[/Keyboard/d,/Keyboard/s,/Keyboard/a]'
   m_NeverAutoSwitchControlSchemes: 0
