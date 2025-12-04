@@ -13,13 +13,28 @@ public class LevelManager : MonoBehaviour
     public GameObject basicEnemy;
     public GameObject bossEnemy;
     public GameObject intermEnemy;
+    private GameObject player;
     private bool isSpawning = false;
     public EnemyManager enemyManager;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI waveText;
+    private List<int> fullHPwaves = new List<int>();
+    private List<int> halfHPwaves = new List<int>();
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
+
+        //add levels to HPwaves lists corresponding to how much HP players get when completing that level
+        fullHPwaves.Add(1);
+        fullHPwaves.Add(2);
+        fullHPwaves.Add(7);
+
+        halfHPwaves.Add(3);
+        halfHPwaves.Add(4);
+        halfHPwaves.Add(5);
+        halfHPwaves.Add(6);
+
         wavesPerLevel.Add(0, 0);
         wavesPerLevel.Add(1, 1);
         wavesPerLevel.Add(2, 1);
@@ -35,12 +50,14 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"level {level} wave {wave}");
+        // Debug.Log($"level {level} wave {wave}");
         if (!isSpawning && enemyManager.AllEnemiesDead())
         {
             wave += 1;
             if (wave > wavesPerLevel[level])
             {
+                //heal player
+                AddPlayerHP(level);
                 level++;
                 wave = 1;
                 // Debug.Log($"should be resetting..");
@@ -49,6 +66,36 @@ public class LevelManager : MonoBehaviour
         }
         levelText.text = $"Level {levelNames[level - 1]}";
         waveText.text = $"Wave {wave}";
+    }
+
+    private void AddPlayerHP(int level){
+
+        //given level just beaten, adds corresponding HP to player as reward
+
+        float maxHPtoAdd = 0;
+        float playerMaxHP = player.GetComponent<Player>().maxHP;
+        float playerCurrentHP = player.GetComponent<Player>().currentHP;
+
+        //find full player HP or half player HP
+        if (fullHPwaves.Contains(level)){
+            maxHPtoAdd = player.GetComponent<Player>().maxHP;
+        }
+        else if (halfHPwaves.Contains(level)){
+            maxHPtoAdd = player.GetComponent<Player>().maxHP / 2;
+        }
+
+        //figure out actual amount to add (to not exceed max)
+        if (playerCurrentHP + maxHPtoAdd <= playerMaxHP){
+            //add full amount if it does not exceed max
+            player.GetComponent<Player>().currentHP += maxHPtoAdd;
+        }
+        else{
+            //if possible amount exceeds max, set player HP to max
+            player.GetComponent<Player>().currentHP = playerMaxHP;
+        }
+
+        // Debug.Log("Added HP to player. current HP is now"+player.GetComponent<Player>().currentHP);
+
     }
 
     IEnumerator SpawnMonstersWave2()

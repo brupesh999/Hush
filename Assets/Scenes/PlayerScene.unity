@@ -1653,17 +1653,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5704947262386727091, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
-      propertyPath: maxHP
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: -5704947262386727091, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
       propertyPath: hitSound
       value: 
       objectReference: {fileID: 7638919194356378432}
-    - target: {fileID: -5704947262386727091, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
-      propertyPath: currentHP
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: -5704947262386727091, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
       propertyPath: footsteps
       value: 
@@ -1711,10 +1703,6 @@ PrefabInstance:
     - target: {fileID: 7530280782213384557, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7530280782213384557, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1772,7 +1760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartPrefab: {fileID: 6053039676777641293, guid: 7423cd4ec85b24dd48df5e1fca04a4f4, type: 3}
-  healthPerHeart: 200
+  healthPerHeart: 20
   fullHeart: {fileID: 1109063772672943838, guid: c2c26591a61704636b3f13ed3bd382b0, type: 3}
   emptyHeart: {fileID: 1867641300, guid: c2c26591a61704636b3f13ed3bd382b0, type: 3}
   halfFullHeart: {fileID: 2023413425, guid: c2c26591a61704636b3f13ed3bd382b0, type: 3}
