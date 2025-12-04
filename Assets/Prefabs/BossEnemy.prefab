@@ -405,6 +405,7 @@ GameObject:
   - component: {fileID: 1055575885864414249}
   - component: {fileID: 264352513868295723}
   - component: {fileID: 4608473842425146814}
+  - component: {fileID: 2902926150548268500}
   m_Layer: 0
   m_Name: BossEnemy
   m_TagString: Enemy
@@ -557,11 +558,10 @@ MonoBehaviour:
   meleeAttackDamage: 30
   groundYPosition: -4
   spawnPoint: {x: 7, y: 0, z: 0}
+  secDeathAnimationLength: 1.4
 --- !u!95 &4608473842425146814
 Animator:
   serializedVersion: 7
---- !u!114 &2902926150548268500
-MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -581,6 +581,14 @@ MonoBehaviour:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2902926150548268500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7530280782213384557}
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 127b1b2af2bca4c919e67aaf22cf527b, type: 3}
   m_Name: 
