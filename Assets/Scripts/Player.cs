@@ -1,8 +1,8 @@
 //using System.Diagnostics;
-using UnityEngine;
-using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -43,8 +43,9 @@ public class Player : MonoBehaviour
     private float strLRTimer;
 
     [Header("Deflect Settings")]
-    [SerializeField] private float deflectDistance = 0.5f;
-    private List<RaycastHit2D> castResult = new List<RaycastHit2D>();//need this for cast
+    [SerializeField]
+    private float deflectDistance = 0.5f;
+    private List<RaycastHit2D> castResult = new List<RaycastHit2D>(); //need this for cast
 
     [Header("Heal Settings")]
     public int healAmt = 5;
@@ -83,8 +84,6 @@ public class Player : MonoBehaviour
 
     private float dir;
     private Vector3 fireDirection;
-
-    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -175,21 +174,18 @@ public class Player : MonoBehaviour
             animationController.playAttackAnim();
             PlayChordAttack(true, false, false);
 
-            GameObject attack = Instantiate(
-                meleeAttack,
-                transform.position,
-                Quaternion.identity
-            );
+            GameObject attack = Instantiate(meleeAttack, transform.position, Quaternion.identity);
 
             BasicPlayerMelee meleeComponent = attack.GetComponent<BasicPlayerMelee>();
             meleeComponent.Init(transform, meleeDamage, fireDirection);
             meleeComponent.playAttackAnim(transform.position);
         }
     }
+
     public void OnLR(InputAction.CallbackContext context)
     {
         // UnityEngine.Debug.Log("lr timer " + lrTimer);
-        if (context.started && lrTimer >= lrCooldown)
+        if (context.started && lrTimer >= lrCooldown && LevelManager.level >= 5)
         {
             // UnityEngine.Debug.Log("long range started");
             lrTimer = 0f;
@@ -210,22 +206,19 @@ public class Player : MonoBehaviour
             projectileComponent.playLRAnim(transform.position);
         }
     }
+
     public void OnStr(InputAction.CallbackContext context)
     {
         UnityEngine.Debug.Log("str timer " + strTimer);
-        if (context.started && strTimer >= strCooldown)
+        if (context.started && strTimer >= strCooldown && LevelManager.level >= 2)
         {
             animationController.playAttackAnim();
             PlayChordAttack(true, true, false);
 
-            GameObject attack = Instantiate(
-                meleeAttack,
-                transform.position,
-                Quaternion.identity
-            );
+            GameObject attack = Instantiate(meleeAttack, transform.position, Quaternion.identity);
 
             BasicPlayerMelee meleeComponent = attack.GetComponent<BasicPlayerMelee>();
-            meleeComponent.Init(transform, strMultiplier*meleeDamage, fireDirection);
+            meleeComponent.Init(transform, strMultiplier * meleeDamage, fireDirection);
             meleeComponent.playStrengthAnim(transform.position);
         }
     }
@@ -233,7 +226,7 @@ public class Player : MonoBehaviour
     public void OnStrLR(InputAction.CallbackContext context)
     {
         // UnityEngine.Debug.Log("str lr timer " + lrTimer);
-        if (context.started && strLRTimer >= strLRCooldown)
+        if (context.started && strLRTimer >= strLRCooldown && LevelManager.level >= 5)
         {
             // UnityEngine.Debug.Log("long range started");
             lrTimer = 0f;
@@ -250,26 +243,39 @@ public class Player : MonoBehaviour
             );
 
             BasicPlayerProjectile projectileComponent = lr.GetComponent<BasicPlayerProjectile>();
-            projectileComponent.Init(transform, lrDamage, strMultiplier*fireDirection);
+            projectileComponent.Init(transform, lrDamage, strMultiplier * fireDirection);
             projectileComponent.playStrengthLRAnim(transform.position);
         }
     }
 
-    public void OnDeflect(InputAction.CallbackContext context){
-
+    public void OnDeflect(InputAction.CallbackContext context)
+    {
         //use cast to find projectiles w/in the defined distance
         castResult = new List<RaycastHit2D>();
 
-        if (gameObject.GetComponent<Collider2D>().Cast(fireDirection, castResult, deflectDistance) > 0){
-            foreach (RaycastHit2D hitItem in castResult){
-
-                if (hitItem.transform.gameObject.tag == "EnemyProjectile"){
+        if (
+            gameObject.GetComponent<Collider2D>().Cast(fireDirection, castResult, deflectDistance)
+            > 0
+        )
+        {
+            foreach (RaycastHit2D hitItem in castResult)
+            {
+                if (hitItem.transform.gameObject.tag == "EnemyProjectile")
+                {
                     //make sure projectile is going to hit Player
-                    if (hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().direction == fireDirection * -1){
-                        hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().OnDeflected();
+                    if (
+                        hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().direction
+                        == fireDirection * -1
+                    )
+                    {
+                        hitItem
+                            .transform.gameObject.GetComponent<BasicEnemyProjectile>()
+                            .OnDeflected();
 
-                    //and then deal half damage from projectile to player
-                    currentHP -= hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage / 2f;
+                        //and then deal half damage from projectile to player
+                        currentHP -=
+                            hitItem.transform.gameObject.GetComponent<BasicEnemyProjectile>().damage
+                            / 2f;
                     }
                 }
             }
@@ -278,7 +284,7 @@ public class Player : MonoBehaviour
 
     public void OnShield(InputAction.CallbackContext context)
     {
-        if (context.started && !shieldActive)
+        if (context.started && !shieldActive && LevelManager.level >= 7)
         {
             ActivateShield();
         }
@@ -286,7 +292,7 @@ public class Player : MonoBehaviour
 
     public void OnHeal(InputAction.CallbackContext context)
     {
-        if (context.started && healTimer >= healCooldown)
+        if (context.started && healTimer >= healCooldown && LevelManager.level >= 3)
         {
             healTimer = 0f;
 
@@ -298,13 +304,13 @@ public class Player : MonoBehaviour
             {
                 currentHP = maxHP;
             }
-
         }
         else
         {
             // UnityEngine.Debug.Log("heal still on cooldown " + (healCooldown - healTimer) + "seconds left");
-        } 
+        }
     }
+
     void LogAttackBar()
     {
         if (MusicConductor.Instance != null)
@@ -327,7 +333,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
     void ActivateShield()
     {
         shieldActive = true;
@@ -348,14 +353,16 @@ public class Player : MonoBehaviour
         // UnityEngine.Debug.Log("ApplyDamage dmg is "+dmg);
         //Debug.Log("ApplyDamage called");//DEBUG
         currentHP -= dmg;
-        if (currentHP < 0) currentHP = 0;
+        if (currentHP < 0)
+            currentHP = 0;
 
         // UnityEngine.Debug.Log("Player took " + dmg + " new Player HP: " + currentHP);
         // j so we know it workslol
         if (shieldActive)
         {
             hitSound.volume = 0.25f;
-        } else
+        }
+        else
         {
             hitSound.volume = 1.0f;
         }
@@ -366,7 +373,8 @@ public class Player : MonoBehaviour
             animationController.playDeathAnim();
             // UnityEngine.Debug.Log("Player has died.");
             // need to do some death animation or sth idk
-        } else
+        }
+        else
         {
             animationController.playHitAnim();
         }
@@ -377,7 +385,6 @@ public class Player : MonoBehaviour
     // {
     //     ApplyDamage(10); // how much damage idk
     // }
-
 
     public void ShieldBroken()
     {
