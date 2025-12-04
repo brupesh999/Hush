@@ -29,7 +29,7 @@ public class BasicPlayerProjectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<BasicEnemy>(out var enemy))
+        if (other.TryGetComponent<Enemy>(out var enemy))
         {
             Debug.Log("Projectile hit enemy!");
             enemy.TakeDamage(damage);

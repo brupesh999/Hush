@@ -26,7 +26,7 @@ public class BossEnemy : Enemy
 
     [Header ("Damage & Health")]
     [SerializeField] private float meleeAttackDamage = 30f;
-    public override float maxHP { get {return 300f;}}
+    public override float maxHP { get {return 5f;}}
 
     [Header ("Position settings")]
     //current direction and castResult defined in parent class (Enemy)
@@ -60,12 +60,6 @@ public class BossEnemy : Enemy
         AoETimekeeper += Time.deltaTime;
 
         float playerDistance = DetectPlayer();
-
-        if (currentHP <= 0)
-        {
-            animator.SetBool("isDead", true);
-            return;
-        }
 
         //attacks are split both by player distance and by attack cooldown
 
@@ -110,7 +104,7 @@ public class BossEnemy : Enemy
             //if >10 or <1 (-1 for if it can't see the player), then do nothing
         }
     }
-    
+
     // private void PerformMeleeAttack(){
 
     //     //first telegraph attack

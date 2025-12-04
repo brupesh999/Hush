@@ -29,7 +29,7 @@ public class BasicPlayerMelee : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<BasicEnemy>(out var enemy))
+        if (other.TryGetComponent<Enemy>(out var enemy))
         {
             // Debug.Log("Melee hit for " + damage + " damage");
             enemy.TakeDamage(damage);

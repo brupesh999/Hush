@@ -32,9 +32,12 @@ public class IntermediateEnemy : Enemy
     protected override float movementSpeed {get {return 1f;}}
     [SerializeField] private float dashStep = 4f;//movement speed per frame when dashing
 
+    private Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
         currentHP = maxHP;
         if (EnemyManager.Instance != null) {
             EnemyManager.Instance.RegisterEnemy(this);
@@ -65,6 +68,7 @@ public class IntermediateEnemy : Enemy
                     if (meleeTimekeeper >= meleeCooldown){
                         timekeeper = 0f;
                         // Debug.Log("Melee attack!");
+                        animator.SetTrigger("TriggerAttack");
                         PerformMeleeAttack(meleeDetectionDistance, meleeAttackDamage);
                     }
                 }
@@ -75,6 +79,7 @@ public class IntermediateEnemy : Enemy
                         timekeeper = 0f;
                         dashTimekeeper = 0f;//reset timekeeper - other attacks do this in function definition
                         // Debug.Log("Dash attack!");
+                        animator.SetTrigger("TriggerAttack");
                         PerformDashAttack();
                     }
                 }
@@ -83,6 +88,7 @@ public class IntermediateEnemy : Enemy
                 else if (playerDistance <= projectileDetectionDistance){
                     if (projectileTimekeeper >= projectileCooldown){
                         timekeeper = 0f;
+                        animator.SetTrigger("TriggerAttack");
                         // Debug.Log("Shoot!");
                         CreateProjectile(projectile);
                     }

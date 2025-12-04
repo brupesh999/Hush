@@ -125,8 +125,6 @@ public abstract class Enemy : MonoBehaviour
         foreach(Transform child in gameObject.GetComponentsInChildren<Transform>()){
             child.gameObject.transform.SetParent(null);
         }
-
         Destroy(gameObject);
-       
     }
 }
