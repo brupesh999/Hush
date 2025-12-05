@@ -71,7 +71,12 @@ public class LevelManager : MonoBehaviour
             }
             Trigger();
         }
-        levelText.text = $"Level {levelNames[level - 1]}";
+        if (level == 0)
+        {
+            levelText.text = "Level Do";
+        } else {
+            levelText.text = $"Level {levelNames[level - 1]}";
+        }
         waveText.text = $"Wave {wave}";
     }
 
