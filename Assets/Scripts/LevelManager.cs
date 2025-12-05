@@ -56,6 +56,17 @@ public class LevelManager : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    private bool isWaitingForNextLevel = false;
+
+    IEnumerator DelayTrigger()
+    {
+        isWaitingForNextLevel = true;
+        yield return new WaitForSeconds(8f);
+        Trigger();
+        isWaitingForNextLevel = false;
+    }
+
     void Update()
     {
         if (!isSpawning && enemyManager.AllEnemiesDead())
@@ -67,6 +78,7 @@ public class LevelManager : MonoBehaviour
                 AddPlayerHP(level);
                 level++;
                 wave = 1;
+
                 // Debug.Log($"should be resetting..");
             }
             Trigger();
@@ -249,7 +261,11 @@ public class LevelManager : MonoBehaviour
     {
         Vector3 addedPos = transform.position + delta;
         Debug.Log(addedPos);
-        GameObject spawnedEnemy = Instantiate(monster, transform.position + delta, Quaternion.identity);
+        GameObject spawnedEnemy = Instantiate(
+            monster,
+            transform.position + delta,
+            Quaternion.identity
+        );
         spawnedEnemy.GetComponent<Enemy>().spawnPoint = transform.position + delta;
     }
 }
