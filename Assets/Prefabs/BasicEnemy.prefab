@@ -319,7 +319,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1009231380275827865}
@@ -392,12 +392,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587b62be399c007488be291e07108b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoint: {x: 4, y: 0, z: 0}
   currentDirection: {x: -1, y: 0, z: 0}
   meleeAttack: {fileID: 29309149845838319, guid: 38691b51d06144aa0b6ae2ffc3b8eedd, type: 3}
   projectile: {fileID: 1272153621244786352, guid: 3cc57f15d5be1094ba5d4fdd7c4563b6, type: 3}
   shootInterval: 1
   detectionDistance: 7
-  spawnPoint: {x: 4, y: 0, z: 0}
 --- !u!61 &1055575885864414249
 BoxCollider2D:
   m_ObjectHideFlags: 0

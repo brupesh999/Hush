@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 1358702285693238991}
   - component: {fileID: 381616504297601929}
   - component: {fileID: 2408546407019101128}
+  - component: {fileID: 3363492698537865736}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -77,8 +78,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3.5, y: 3.5, z: 1.75}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2929447130305801373}
   m_Father: {fileID: 0}
@@ -151,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
-  currentHP: 10
+  currentHP: 100
   meleeAttack: {fileID: 2200770599266668781, guid: ada5c4bb29aa247e69e1af7d403d6cf3, type: 3}
   meleeDamage: 10
   attackCooldown: 0.1
@@ -220,6 +221,18 @@ MonoBehaviour:
       - m_Target: {fileID: -5704947262386727091}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3363492698537865736}
+        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
+        m_MethodName: OnAction
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -321,12 +334,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3363492698537865736}
+        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
+        m_MethodName: OnShield
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1955a57e-5a2f-4d02-9ba9-fa026d8b9efd
     m_ActionName: Player/Shield
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -5704947262386727091}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnHeal
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3363492698537865736}
+        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
         m_MethodName: OnHeal
         m_Mode: 0
         m_Arguments:
@@ -353,6 +390,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3363492698537865736}
+        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
+        m_MethodName: OnIncRad
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8ff5f763-c246-4388-858a-c5a41eb0e6df
     m_ActionName: Player/LongRange
   - m_PersistentCalls:
@@ -369,12 +418,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3363492698537865736}
+        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
+        m_MethodName: OnDeflect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 22015dbb-4695-4119-a31c-60f07a232427
     m_ActionName: 'Player/Deflect[/Keyboard/q]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -5704947262386727091}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnStr
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3363492698537865736}
+        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
         m_MethodName: OnStr
         m_Mode: 0
         m_Arguments:
@@ -503,3 +576,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3363492698537865736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7530280782213384557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0bfa3d7977f34b769a77d94d1e4ec7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutTextObject: {fileID: 0}
