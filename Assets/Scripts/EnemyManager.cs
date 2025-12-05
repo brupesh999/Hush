@@ -1,9 +1,9 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-   public static EnemyManager Instance;
+    public static EnemyManager Instance;
 
     private readonly List<Enemy> enemies = new List<Enemy>();
 
@@ -17,7 +17,8 @@ public class EnemyManager : MonoBehaviour
 
     public void RegisterEnemy(Enemy enemy)
     {
-        if (enemy == null) return;
+        if (enemy == null)
+            return;
 
         if (!enemies.Contains(enemy))
             enemies.Add(enemy);
@@ -25,7 +26,8 @@ public class EnemyManager : MonoBehaviour
 
     public void UnregisterEnemy(Enemy enemy)
     {
-        if (enemy == null) return;
+        if (enemy == null)
+            return;
 
         enemies.Remove(enemy);
     }
@@ -63,7 +65,8 @@ public class EnemyManager : MonoBehaviour
     public float HealthRatio()
     {
         float max = TotalMaxHP();
-        if (max <= 0) return 0;
+        if (max <= 0)
+            return 0;
         return TotalCurrentHP() / max;
     }
 }

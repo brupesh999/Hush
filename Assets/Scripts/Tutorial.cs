@@ -10,44 +10,57 @@ public class Tutorial : MonoBehaviour
     [SerializeField]
     private GameObject tutTextObject;
 
-    private PlayerInput playerInput;
     private TextMeshProUGUI tutText;
 
-    private static string[] actions =
+    private static readonly string[] actions =
     {
         "attack",
         "deflect",
-        "heal",
-        "shield",
-        "increase radius",
         "increase strength",
+        "heal",
+        "increase radius",
+        "shield",
     };
+
     static Dictionary<string, string> actionMap = new Dictionary<string, string>()
     {
         { "attack", "Press A to melee attack when near an enemy" },
-        { "deflect", "Press Q to deflect" },
+        { "deflect", "Press Q to deflect a moving attack!" },
         { "heal", "Press W to heal" },
         { "shield", "Press E to shield" },
-        { "increase radius", "Press D to expand your radius in combo with another button" },
-        { "increase strength", "Press S to expand your strength!" },
+        { "increase radius", "Press D in combination with attack to do long range attacks!" },
+        { "increase strength", "Press S while attacking to increase your strength!" },
     };
-    private static int actionsIndex = 0;
 
-    public static Action<InputAction.CallbackContext> GenerateOnScript(string title)
+    static Dictionary<string, int> levelReqs = new Dictionary<string, int>()
     {
-        return (InputAction.CallbackContext context) =>
-        {
-            if (context.started && actions[actionsIndex] == title)
-            {
-                Debug.Log("If these walls could talk 2");
-                actionsIndex++;
-            }
-            else
-            {
-                Debug.Log("If these walls could talk part 2");
-            }
-        };
-    }
+        { "attack", 1 },
+        { "deflect", 1 },
+        { "heal", 3 },
+        { "shield", 7 },
+        { "increase radius", 5 },
+        { "increase strength", 2 },
+    };
+
+    private static bool[] activated = new bool[actions.Length];
+
+    private int actionsIndex = 0;
+
+    // public static Action<InputAction.CallbackContext> GenerateOnScript(string title)
+    // {
+    //     return (InputAction.CallbackContext context) =>
+    //     {
+    //         if (context.started && actions[actionsIndex] == title)
+    //         {
+    //             Debug.Log("If these walls could talk 2");
+    //             actionsIndex++;
+    //         }
+    //         else
+    //         {
+    //             Debug.Log("If these walls could talk part 2");
+    //         }
+    //     };
+    // }
 
     public void OnAction(InputAction.CallbackContext context)
     {
@@ -91,6 +104,14 @@ public class Tutorial : MonoBehaviour
         }
     }
 
+    public void OnStr(InputAction.CallbackContext context)
+    {
+        if (context.started && actions[actionsIndex] == "increase strength")
+        {
+            actionsIndex++;
+        }
+    }
+
     // public Action<InputAction.CallbackContext> OnDeflect = GenerateOnScript("deflect");
 
     // public Action<InputAction.CallbackContext> OnHeal = GenerateOnScript("heal");
@@ -101,7 +122,7 @@ public class Tutorial : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
+        // playerInput = GetComponent<PlayerInput>();
         tutText = tutTextObject.GetComponent<TextMeshProUGUI>();
         // playerInput.actions["Deflect"].performed += OnDeflect;
 
@@ -117,10 +138,7 @@ public class Tutorial : MonoBehaviour
         if (actionsIndex < actions.Length)
         {
             tutText.text = actionMap[actions[actionsIndex]];
-        }
-        else
-        {
-            tutText.gameObject.SetActive(false);
+            tutText.gameObject.SetActive(LevelManager.level >= levelReqs[actions[actionsIndex]]);
         }
     }
 }
