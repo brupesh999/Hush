@@ -40,14 +40,14 @@ public class BasicPlayerProjectile : MonoBehaviour
     public void playLRAnim(Vector2 playerPos)
     {
         Debug.Log("orange");
-        transform.position = playerPos + new Vector2(1.5f, 0f);
+        transform.position = playerPos; // + new Vector2(1.5f, 0f);
         animator.SetTrigger("launchOrangeAttack");
     }
 
     public void playStrengthLRAnim(Vector2 playerPos)
     {
         Debug.Log("yellow");
-        transform.position = playerPos + new Vector2(1.5f, 0f);
+        transform.position = playerPos; // + new Vector2(1.5f, 0f);
         animator.SetTrigger("launchYellowAttack");
     }
 }

@@ -40,8 +40,12 @@ public abstract class Enemy : MonoBehaviour
             //only move up to boundary
             Vector3 endPoint = spawnPoint + currentDirection * movementDistance;
             transform.Translate(endPoint - transform.position);
+            
             //flip direction
             currentDirection *= -1;
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
         }
         else{
             //move full distance
