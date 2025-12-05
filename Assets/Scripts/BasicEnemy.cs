@@ -68,7 +68,7 @@ public class BasicEnemy : Enemy
         //no player, move back and forth
         else
         {
-            // Move(Time.deltaTime, spawnPoint);
+            Move(Time.deltaTime, spawnPoint);
         }
     }
 }
