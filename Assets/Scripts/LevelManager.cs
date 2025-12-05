@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -57,36 +58,50 @@ public class LevelManager : MonoBehaviour
 
     // Update is called once per frame
 
-    private bool isWaitingForNextLevel = false;
+    private bool isWaitingForNextWave = false;
 
-    IEnumerator DelayTrigger()
+    IEnumerator DelayTrigger(float time)
     {
-        isWaitingForNextLevel = true;
-        yield return new WaitForSeconds(8f);
+        isWaitingForNextWave = true;
+        yield return new WaitForSeconds(time);
         Trigger();
-        isWaitingForNextLevel = false;
+        isWaitingForNextWave = false;
     }
 
     void Update()
     {
-        if (!isSpawning && enemyManager.AllEnemiesDead())
+        if (!isSpawning && enemyManager.AllEnemiesDead() && !isWaitingForNextWave)
         {
             wave += 1;
+            bool changedLevel = wave > wavesPerLevel[level];
             if (wave > wavesPerLevel[level])
             {
                 //heal player
                 AddPlayerHP(level);
                 level++;
                 wave = 1;
-
                 // Debug.Log($"should be resetting..");
             }
-            Trigger();
+            if (changedLevel && level > 1)
+            {
+                StartCoroutine(DelayTrigger(3f));
+            }
+            else
+            {
+                StartCoroutine(DelayTrigger(1f));
+            }
+            // Trigger();
         }
         if (level == 0)
         {
             levelText.text = "Level Do";
-        } else {
+        }
+        else if (level >= wavesPerLevel.Count)
+        {
+            levelText.text = "Finished!";
+        }
+        else
+        {
             levelText.text = $"Level {levelNames[level - 1]}";
         }
         waveText.text = $"Wave {wave}";
