@@ -48,6 +48,14 @@ public abstract class Enemy : MonoBehaviour
             transform.Translate(movement);
         }
 
+        // Clamp position so enemy stays on screen
+        if (transform.position.x <= -8f) {
+	        transform.position = new Vector3(-8f, transform.position.y, transform.position.z);
+        }
+	    else if (transform.position.x >=8f){
+	        transform.position = new Vector3(8f, transform.position.y, transform.position.z);
+        }
+
     }
     
     public float DetectPlayer(){

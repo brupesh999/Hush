@@ -124,6 +124,14 @@ public class Player : MonoBehaviour
             transform.localScale = scale;
         }
 
+        // Clamp x position so player stays on screen
+        if (transform.position.x <= -8f) {
+	        transform.position = new Vector3(-8f, transform.position.y, transform.position.z);
+        }
+	    else if (transform.position.x >=8f){
+	        transform.position = new Vector3(8f, transform.position.y, transform.position.z);
+        }
+
         // player is walking on ground if there is forward movement but no upward movement
         if (moveInput.x != 0 && rb.linearVelocity.y == 0)
         {
