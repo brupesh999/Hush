@@ -236,13 +236,15 @@ public class LevelManager : MonoBehaviour
 
     void InstantiateMonster(GameObject monster)
     {
-        Instantiate(monster, transform.position, Quaternion.identity);
+        GameObject spawnedEnemy = Instantiate(monster, transform.position, Quaternion.identity);
+        spawnedEnemy.GetComponent<Enemy>().spawnPoint = transform.position;
     }
 
     void InstantiateMonster(GameObject monster, Vector3 delta)
     {
         Vector3 addedPos = transform.position + delta;
         Debug.Log(addedPos);
-        Instantiate(monster, transform.position + delta, Quaternion.identity);
+        GameObject spawnedEnemy = Instantiate(monster, transform.position + delta, Quaternion.identity);
+        spawnedEnemy.GetComponent<Enemy>().spawnPoint = transform.position + delta;
     }
 }

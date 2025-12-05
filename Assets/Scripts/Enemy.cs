@@ -10,7 +10,7 @@ public abstract class Enemy : MonoBehaviour
     public float currentHP { get; protected set; }
 
     [Header ("Move-y settings")]
-    // protected Vector3 spawnPoint { get; set; }//enemy's origin point, movement will center around
+    public Vector3 spawnPoint = new Vector3(4, 0, 0);//enemy's origin point, movement will center around
     protected abstract float movementDistance {get;}//how far enemy will move from spawnPoint
     protected abstract float movementSpeed {get;}
     public Vector3 currentDirection = new Vector3(-1, 0, 0);//currently moving left or right?
