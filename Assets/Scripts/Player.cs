@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
     private float moveSpeed = 5f;
 
     [SerializeField]
-    private float jumpForce = 7f;
+    private float jumpForce = 8f;
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private bool isGrounded = true;
