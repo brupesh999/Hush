@@ -166,7 +166,7 @@ MonoBehaviour:
   healAmt: 20
   shieldObject: {fileID: 1272153621244786352, guid: cb72fae1615aa466ba45b7c0661d1c31, type: 3}
   moveSpeed: 5
-  jumpForce: 7
+  jumpForce: 8
   footsteps: {fileID: 0}
   hitSound: {fileID: 0}
   hitSoundClip: {fileID: 8300000, guid: 4930a7977fddd48bab820e9f25d013c7, type: 3}

@@ -1688,6 +1688,10 @@ PrefabInstance:
       propertyPath: footsteps
       value: 
       objectReference: {fileID: 4254663717816256953}
+    - target: {fileID: -5704947262386727091, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
+      propertyPath: jumpForce
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3363492698537865736, guid: 311bf602909584fc5a4a1327d441b154, type: 3}
       propertyPath: tutTextObject
       value: 
