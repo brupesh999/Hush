@@ -5,21 +5,18 @@ using System.Collections.Generic;
 public class BasicEnemyMelee : MonoBehaviour
 {
 
+    [SerializeField] private float indicatorRadius = 0.1f;
     [SerializeField] private float secAttackDelay = 0.1f;
     [SerializeField] private float secAttackDuration = 0.1f;
-    [SerializeField] public float damage = 10f;
-    [SerializeField] private float attackRange = 3f;
-    private List<RaycastHit2D> castResult = new List<RaycastHit2D>();
+    public float damage = 10f;
+
+    private GameObject player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {   
+        player = GameObject.FindWithTag("Player");
         StartCoroutine(Attack());
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private IEnumerator Attack(){
@@ -30,25 +27,17 @@ public class BasicEnemyMelee : MonoBehaviour
         //visual indicator
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 255f); // easier to time things if changed in code rather than anim
 
-        //find player
-        bool foundPlayer = false;
-        GameObject player = gameObject;
+        //see if player is close enough to be hit
+        bool playerHit = false;
 
-        if (gameObject.GetComponent<Collider2D>().Cast(new Vector3(0, 1, 0), castResult, attackRange) > 1){
-            foreach (RaycastHit2D hitItem in castResult){
-                if (hitItem.transform.gameObject.tag == "Player"){
-
-                    foundPlayer = true;
-                    player = hitItem.transform.gameObject;
-                    break;
-                }
-
-            }
+        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        if (distanceToPlayer <= indicatorRadius){
+            playerHit = true;
         }
 
         StartCoroutine(Disappear());
 
-        if (foundPlayer){
+        if (playerHit){
             player.GetComponent<Player>().ApplyDamage(damage);
         }
     }

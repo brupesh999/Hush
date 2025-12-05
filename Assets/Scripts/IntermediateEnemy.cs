@@ -9,8 +9,11 @@ public class IntermediateEnemy : Enemy
     float meleeTimekeeper = 0f;//how much time has passed (in s) since enemy has performed melee attack
     float dashTimekeeper = 0f;//same for dash attack
     
+    [Header("Attacks")]
     [SerializeField] private GameObject projectile;
+    [SerializeField] private GameObject meleeAttack;
     [SerializeField] private float meleeAttackDamage = 20f;
+    [SerializeField] private float meleeOffset = 2f;
 
     [Header ("Cooldowns")]
     [SerializeField] private float overallAttackCooldown = 1f;
@@ -20,8 +23,8 @@ public class IntermediateEnemy : Enemy
 
     [Header ("Detection Distances")]
     [SerializeField] private float projectileDetectionDistance = 8f;
-    [SerializeField] private float meleeDetectionDistance = 3f;
-    [SerializeField] private float dashDetectionDistance = 5f;
+    [SerializeField] private float meleeDetectionDistance = 4f;
+    [SerializeField] private float dashDetectionDistance = 6f;
 
     [Header("Health Settings")]
     public override float maxHP { get {return 100f;}}
@@ -30,7 +33,8 @@ public class IntermediateEnemy : Enemy
     // [SerializeField] private Vector3 spawnPoint = new Vector3(4, 0, 0); //enemy's origin point, movement will center around
     protected override float movementDistance {get {return 2f;}}//how far enemy will move from spawnPoint
     protected override float movementSpeed {get {return 1f;}}
-    [SerializeField] private float dashStep = 4f;//movement speed per frame when dashing
+
+    // private float dashStep = dashDetectionDistance;//movement speed per frame when dashing
 
     private Animator animator;
 
@@ -67,9 +71,10 @@ public class IntermediateEnemy : Enemy
                     //perform melee attack
                     if (meleeTimekeeper >= meleeCooldown){
                         timekeeper = 0f;
+                        meleeTimekeeper = 0f;
                         // Debug.Log("Melee attack!");
                         animator.SetTrigger("TriggerAttack");
-                        PerformMeleeAttack(meleeDetectionDistance, meleeAttackDamage);
+                        PerformMeleeAttack(meleeAttack, meleeAttackDamage, meleeOffset);
                     }
                 }
 
@@ -112,10 +117,10 @@ public class IntermediateEnemy : Enemy
         spawnPoint += movement;
 
         //go to player x position
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPosition, transform.position.y, 0f), dashStep);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPosition, transform.position.y, 0f), dashDetectionDistance);
 
         //do melee attack
-        PerformMeleeAttack(meleeDetectionDistance, meleeAttackDamage);
+        PerformMeleeAttack(meleeAttack, meleeAttackDamage, meleeOffset);
     }
 
 }
