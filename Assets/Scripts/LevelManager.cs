@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public static int level;
+    public static int level = 0;
     public static int wave = 1;
+
+    public static void Restart()
+    {
+        wave = 1;
+        level = 0;
+    }
+
     Dictionary<int, int> wavesPerLevel = new Dictionary<int, int>();
     List<string> levelNames = new List<string>();
     public GameObject basicEnemy;
@@ -50,7 +58,6 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log($"level {level} wave {wave}");
         if (!isSpawning && enemyManager.AllEnemiesDead())
         {
             wave += 1;
@@ -68,8 +75,8 @@ public class LevelManager : MonoBehaviour
         waveText.text = $"Wave {wave}";
     }
 
-    private void AddPlayerHP(int level){
-
+    private void AddPlayerHP(int level)
+    {
         //given level just beaten, adds corresponding HP to player as reward
 
         float maxHPtoAdd = 0;
@@ -77,25 +84,28 @@ public class LevelManager : MonoBehaviour
         float playerCurrentHP = player.GetComponent<Player>().currentHP;
 
         //find full player HP or half player HP
-        if (fullHPwaves.Contains(level)){
+        if (fullHPwaves.Contains(level))
+        {
             maxHPtoAdd = player.GetComponent<Player>().maxHP;
         }
-        else if (halfHPwaves.Contains(level)){
+        else if (halfHPwaves.Contains(level))
+        {
             maxHPtoAdd = player.GetComponent<Player>().maxHP / 2;
         }
 
         //figure out actual amount to add (to not exceed max)
-        if (playerCurrentHP + maxHPtoAdd <= playerMaxHP){
+        if (playerCurrentHP + maxHPtoAdd <= playerMaxHP)
+        {
             //add full amount if it does not exceed max
             player.GetComponent<Player>().currentHP += maxHPtoAdd;
         }
-        else{
+        else
+        {
             //if possible amount exceeds max, set player HP to max
             player.GetComponent<Player>().currentHP = playerMaxHP;
         }
 
         // Debug.Log("Added HP to player. current HP is now"+player.GetComponent<Player>().currentHP);
-
     }
 
     IEnumerator SpawnMonstersWave2()
@@ -231,6 +241,8 @@ public class LevelManager : MonoBehaviour
 
     void InstantiateMonster(GameObject monster, Vector3 delta)
     {
+        Vector3 addedPos = transform.position + delta;
+        Debug.Log(addedPos);
         Instantiate(monster, transform.position + delta, Quaternion.identity);
     }
 }
