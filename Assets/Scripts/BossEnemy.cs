@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class BossEnemy : Enemy
 {
@@ -135,7 +136,8 @@ public class BossEnemy : Enemy
         yield return new WaitForSeconds(secDeathAnimationLength);
 
         Destroy(gameObject);
-
+        Destroy(GameObject.FindWithTag("Player"));
+        SceneManager.LoadScene("EndScene", LoadSceneMode.Additive);
     }
 
 

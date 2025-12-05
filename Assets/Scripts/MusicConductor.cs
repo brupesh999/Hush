@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MusicConductor : MonoBehaviour
 {
@@ -67,6 +68,7 @@ public AudioSource sfxSource;
 
     void Start()
     {
+        
         phraseStartDSP = AudioSettings.dspTime + 0.5f;
 
         drums.PlayScheduled(phraseStartDSP);
@@ -74,9 +76,16 @@ public AudioSource sfxSource;
         melody.PlayScheduled(phraseStartDSP);
         chords.PlayScheduled(phraseStartDSP);
 
-        bass.volume = 0;
-        melody.volume = 0;
-        chords.volume = 0;
+        if (SceneManager.GetActiveScene().name == "EndScene")
+        {
+            bass.volume = 1;
+            melody.volume = 1;
+            chords.volume = 1;
+        } else {
+            bass.volume = 0;
+            melody.volume = 0;
+            chords.volume = 0;
+        }
     }
 
     void Update()
