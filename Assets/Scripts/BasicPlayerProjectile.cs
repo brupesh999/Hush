@@ -39,15 +39,17 @@ public class BasicPlayerProjectile : MonoBehaviour
 
     public void playLRAnim(Vector2 playerPos)
     {
-        Debug.Log("orange");
-        transform.position = playerPos; // + new Vector2(1.5f, 0f);
+        // Debug.Log("orange");
+        float additionalOffset = direction[0] == 1 ? 0.5f : 0.0f;
+        transform.position = playerPos + new Vector2(1.5f * direction[0] + additionalOffset, 0f);
         animator.SetTrigger("launchOrangeAttack");
     }
 
     public void playStrengthLRAnim(Vector2 playerPos)
     {
-        Debug.Log("yellow");
-        transform.position = playerPos; // + new Vector2(1.5f, 0f);
+        // Debug.Log("yellow");
+        float additionalOffset = direction[0] == 1 ? 0.5f : 0.0f;
+        transform.position = playerPos + new Vector2(1.5f * direction[0] + additionalOffset, 0f);
         animator.SetTrigger("launchYellowAttack");
     }
 }

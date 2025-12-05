@@ -38,15 +38,17 @@ public class BasicPlayerMelee : MonoBehaviour
 
     public void playAttackAnim(Vector2 playerPos)
     {
-        Debug.Log("blue");
-        transform.position = playerPos; // + new Vector2(1.5f * direction, 0f);
+        // Debug.Log("blue");
+        float additionalOffset = direction[0] == 1 ? 0.5f : 0.0f;
+        transform.position = playerPos + new Vector2(1.5f * direction[0] + additionalOffset, 0f);
         animator.SetTrigger("launchBlueAttack");
     }
 
     public void playStrengthAnim(Vector2 playerPos)
     {
-        Debug.Log("red");
-        transform.position = playerPos; // + new Vector2(1.5f * direction, 0f);
+        // Debug.Log("red");
+        float additionalOffset = direction[0] == 1 ? 0.5f : 0.0f;
+        transform.position = playerPos + new Vector2(1.5f * direction[0] + additionalOffset, 0f);
         animator.SetTrigger("launchRedAttack");
     }
 }
