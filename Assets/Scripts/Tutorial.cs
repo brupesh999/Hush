@@ -61,7 +61,6 @@ public class Tutorial : MonoBehaviour
     //         }
     //     };
     // }
-
     public void OnAction(InputAction.CallbackContext context)
     {
         if (context.started && actions[actionsIndex] == "attack")
@@ -92,7 +91,7 @@ public class Tutorial : MonoBehaviour
     {
         if (context.started && actions[actionsIndex] == "shield")
         {
-            actionsIndex++;
+            //actionsIndex++;
         }
     }
 
@@ -140,5 +139,6 @@ public class Tutorial : MonoBehaviour
             tutText.text = actionMap[actions[actionsIndex]];
             tutText.gameObject.SetActive(LevelManager.level >= levelReqs[actions[actionsIndex]]);
         }
+        Debug.Log($"{actionsIndex}, {actions[actionsIndex]}");
     }
 }
