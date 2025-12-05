@@ -27,7 +27,7 @@ public class IntermediateEnemy : Enemy
     public override float maxHP { get {return 100f;}}
 
     [Header ("Move settings")]
-    [SerializeField] private Vector3 spawnPoint = new Vector3(4, 0, 0); //enemy's origin point, movement will center around
+    // [SerializeField] private Vector3 spawnPoint = new Vector3(4, 0, 0); //enemy's origin point, movement will center around
     protected override float movementDistance {get {return 2f;}}//how far enemy will move from spawnPoint
     protected override float movementSpeed {get {return 1f;}}
     [SerializeField] private float dashStep = 4f;//movement speed per frame when dashing

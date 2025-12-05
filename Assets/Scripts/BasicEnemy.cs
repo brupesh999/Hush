@@ -24,7 +24,7 @@ public class BasicEnemy : Enemy
 
     [Header("Move-y settings")]
     [SerializeField]
-    private Vector3 spawnPoint = new Vector3(4, 0, 0); //enemy's origin point, movement will center around
+    // private Vector3 spawnPoint = new Vector3(4, 0, 0); //enemy's origin point, movement will center around
     protected override float movementDistance
     {
         get { return 2f; }
