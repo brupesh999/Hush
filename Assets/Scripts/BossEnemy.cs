@@ -12,11 +12,12 @@ public class BossEnemy : Enemy
     [Header ("Prefabs")]
     [SerializeField] private GameObject projectile;
     [SerializeField] private GameObject AoEAttack;
+    [SerializeField] private GameObject meleeAttack;
 
     [Header ("Cooldowns")]
     [SerializeField] private float AoECooldown = 5f;
     [SerializeField] private float projectileCooldown = 2f;
-    [SerializeField] private float meleeCooldown = 1.5f;
+    [SerializeField] private float meleeCooldown = 2f;
     [SerializeField] private float overallAttackCooldown = 1f;
 
     [Header ("Distances for attacks")]
@@ -30,7 +31,7 @@ public class BossEnemy : Enemy
 
     [Header ("Position settings")]
     //current direction and castResult defined in parent class (Enemy)
-
+    [SerializeField] private float meleeOffset = 3f;
     [SerializeField] private float groundYPosition = -4f;//DEBUG - should find this in code, but idk how we're doing the ground rn
 
     // [SerializeField] private Vector3 spawnPoint = new Vector3(4, 0, 0); //enemy's origin point, movement will center around
@@ -73,7 +74,7 @@ public class BossEnemy : Enemy
                 if (meleeTimekeeper >= meleeCooldown){
                     timekeeper = 0f;
                     animator.SetTrigger("TriggerAttack");
-                    PerformMeleeAttack(meleeDetectionDistance, meleeAttackDamage);
+                    PerformMeleeAttack(meleeAttack, meleeAttackDamage, meleeOffset);
                     //reset CD timer
                     meleeTimekeeper = 0;
                 }

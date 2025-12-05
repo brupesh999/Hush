@@ -18,10 +18,6 @@ public abstract class Enemy : MonoBehaviour
     protected GameObject player;
     private List<RaycastHit2D> castResult = new List<RaycastHit2D>();
 
-    [Header("Attack Settings")]
-    [SerializeField] private GameObject meleeAttack;
-
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -91,10 +87,11 @@ public abstract class Enemy : MonoBehaviour
     }
 
 
-    protected void PerformMeleeAttack(float meleeDetectionDistance, float meleeAttackDamage){
+    protected void PerformMeleeAttack(GameObject meleeAttack, float meleeAttackDamage, float meleeOffset){
         Debug.Log("Meleeing");
 
-        CreatePrefab(meleeAttack, transform.position + new Vector3(-meleeDetectionDistance*3/4, 0, 0));
+        GameObject meleeAttackIndicator = Instantiate(meleeAttack, transform.position + meleeOffset * currentDirection, Quaternion.identity);
+        meleeAttackIndicator.GetComponent<BasicEnemyMelee>().damage = meleeAttackDamage;
 
     }
 
