@@ -423,7 +423,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4, y: -2.5, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5366565351233777839}
@@ -544,6 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9f076ec9194c84a837cdfe013a1e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoint: {x: 7, y: 0, z: 0}
   currentDirection: {x: -1, y: 0, z: 0}
   meleeAttack: {fileID: 1648256695857689844}
   projectile: {fileID: 1272153621244786352, guid: 5df2ce93cab83744ca3f62351f820611, type: 3}
@@ -557,7 +558,6 @@ MonoBehaviour:
   meleeDetectionDistance: 4
   meleeAttackDamage: 30
   groundYPosition: -4
-  spawnPoint: {x: 7, y: 0, z: 0}
   secDeathAnimationLength: 1.4
 --- !u!95 &4608473842425146814
 Animator:
