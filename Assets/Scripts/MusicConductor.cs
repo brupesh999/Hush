@@ -116,25 +116,20 @@ public AudioSource sfxSource;
     {
         float intensity = GetEnemyIntensity();
 
-        // turn on layers
-        if (!bassActive && intensity >= bassThreshold)
-            bassActive = true;
+        bassActive   = intensity >= bassThreshold;
+        melodyActive = intensity >= melodyThreshold;
+        chordsActive = intensity >= chordThreshold;
 
-        if (!melodyActive && intensity >= melodyThreshold)
-            melodyActive = true;
+        float fadeSpeed = Time.deltaTime * 3f;
 
-        if (!chordsActive && intensity >= chordThreshold)
-            chordsActive = true;
+        bass.volume   = Mathf.MoveTowards(bass.volume,   bassActive   ? 1f : 0f, fadeSpeed);
+        melody.volume = Mathf.MoveTowards(melody.volume, melodyActive ? 1f : 0f, fadeSpeed);
+        chords.volume = Mathf.MoveTowards(chords.volume, chordsActive ? 1f : 0f, fadeSpeed);
 
-        // Smooth fade in
-        if (bassActive)
-            bass.volume = Mathf.MoveTowards(bass.volume, 1f, Time.deltaTime * 3f);
-
-        if (melodyActive)
-            melody.volume = Mathf.MoveTowards(melody.volume, 1f, Time.deltaTime * 3f);
-
-        if (chordsActive)
-            chords.volume = Mathf.MoveTowards(chords.volume, 1f, Time.deltaTime * 3f);
+        if (SceneManager.GetActiveScene().name == "EndScene")
+        {
+            bass.volume = melody.volume = chords.volume = 1;
+        }
     }
 
     float GetEnemyIntensity()
