@@ -220,6 +220,8 @@ public class Player : MonoBehaviour
         UnityEngine.Debug.Log("str timer " + strTimer);
         if (context.started && strTimer >= strCooldown && LevelManager.level >= 2)
         {
+            strTimer = 0f;
+
             animationController.playAttackAnim();
             PlayChordAttack(true, true, false);
 
@@ -237,7 +239,7 @@ public class Player : MonoBehaviour
         if (context.started && strLRTimer >= strLRCooldown && LevelManager.level >= 5)
         {
             // UnityEngine.Debug.Log("long range started");
-            lrTimer = 0f;
+            strLRTimer = 0f;
 
             float dir = transform.localScale.x > 0 ? 1 : -1;
             Vector3 fireDirection = new Vector3(dir, 0, 0);
