@@ -14,6 +14,8 @@ public class Tutorial : MonoBehaviour
 
     private static readonly string[] actions =
     {
+        "movement",
+        "jump",
         "attack",
         "deflect",
         "increase strength",
@@ -24,6 +26,8 @@ public class Tutorial : MonoBehaviour
 
     static Dictionary<string, string> actionMap = new Dictionary<string, string>()
     {
+        { "movement", "Use left & right arrow keys to move"},
+        { "jump", "Use up arrow key or spacebar to jump"},
         { "attack", "Press A to melee attack when near an enemy" },
         { "deflect", "Press Q to deflect a moving attack!" },
         { "heal", "Press W to heal" },
@@ -34,6 +38,8 @@ public class Tutorial : MonoBehaviour
 
     static Dictionary<string, int> levelReqs = new Dictionary<string, int>()
     {
+        { "movement", 1},
+        { "jump", 1},
         { "attack", 1 },
         { "deflect", 1 },
         { "heal", 3 },
@@ -61,6 +67,23 @@ public class Tutorial : MonoBehaviour
     //         }
     //     };
     // }
+    public void OnMove(InputAction.CallbackContext context){
+        if (context.started && actions[actionsIndex] == "movement")
+        {
+            actionsIndex++;
+        }
+
+    }
+
+    public void OnJump(InputAction.CallbackContext context){
+        if (context.started && actions[actionsIndex] == "jump")
+        {
+            actionsIndex++;
+        }
+
+    }
+
+
     public void OnAction(InputAction.CallbackContext context)
     {
         if (context.started && actions[actionsIndex] == "attack")

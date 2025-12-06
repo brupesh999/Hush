@@ -88,7 +88,7 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(DelayTrigger(1f));
+                StartCoroutine(DelayTrigger(10f));
             }
             // Trigger();
         }
