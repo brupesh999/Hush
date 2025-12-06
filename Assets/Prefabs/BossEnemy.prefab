@@ -138,7 +138,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 51.4}
+  m_AnchoredPosition: {x: 0, y: 110}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1787356333770934041
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127b1b2af2bca4c919e67aaf22cf527b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 264352513868295723}
   slider: {fileID: 1787356333770934041}
 --- !u!1 &2972504390224307764
 GameObject:
@@ -556,6 +556,7 @@ MonoBehaviour:
   projectileDetectionDistance: 7
   meleeDetectionDistance: 4
   meleeAttackDamage: 30
+  meleeOffset: 3
   groundYPosition: -4
   secDeathAnimationLength: 1.4
 --- !u!95 &4608473842425146814
